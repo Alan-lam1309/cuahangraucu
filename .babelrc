@@ -1,0 +1,15 @@
+// This plugin can simplify the require/import paths in your project. For example,
+// instead of using complex relative paths like ../../../../utils/my-utils, you can write utils/my-utils
+
+{
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "alias": {
+                    "~": "./src"
+                }
+            }
+        ]
+    ]
+}
