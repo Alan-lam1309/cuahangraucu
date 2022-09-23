@@ -9,6 +9,7 @@ function Button({
     text = false,
     rounded = false,
     square = false,
+    mini=false,
     small = false,
     medium = false,
     large = false,
@@ -32,6 +33,7 @@ function Button({
         [style.text]: text,
         [style.rounded]: rounded,
         [style.square]: square,
+        [style.mini]: mini,
         [style.small]: small,
         [style.medium]: medium,
         [style.large]: large,
@@ -39,6 +41,7 @@ function Button({
 
     return (
         <Comp className={classes} {...props}>
+            
             <span>{children}</span>
         </Comp>
     );

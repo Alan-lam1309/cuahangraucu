@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import images from '~/assets/images';
 import Button from '~/components/Button';
@@ -8,26 +8,28 @@ function Header() {
     return (
         <header className={style.wrapper}>
             <div className={style.inner}>
-                <Link to={'/'}>
+                <Button to={'/'}>
                     <img className={style.logo} src={images.logo} alt="logo" />
-                </Link>
+                </Button>
                 <div className={style.pages}>
-                    <Link to={'/'} className={style.home}>
+                    <Button to={'/'} text small className={style.home}>
                         Home
-                    </Link>
-                    <Link to={'/aboutUs'} className={style.page}>
+                    </Button>
+                    <Button to={'/aboutUs'} text small className={style.page}>
                         About
-                    </Link>
-                    <Link to={'/howtoshop'} className={style.page}>
+                    </Button>
+                    <Button to={'/howtoshop'} text small className={style.page}>
                         How to shop
-                    </Link>
-                    <Link to={'/contact'} className={style.page}>
+                    </Button>
+                    <Button to={'/contact'} text small className={style.page}>
                         Contact
-                    </Link>
+                    </Button>
                 </div>
                 <div className={style.action}>
-                <Button className={style.login} rounded>Log in</Button>
-                <Button text>Register</Button>
+                    <Button className={style.login} text mini>
+                        Log in
+                    </Button>
+                    <Button text mini>Register</Button>
                 </div>
             </div>
         </header>

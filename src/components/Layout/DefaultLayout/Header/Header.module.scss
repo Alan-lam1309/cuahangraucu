@@ -2,7 +2,7 @@
     background-color:#FFEDCC;
     width: 100%;
     height: 132px;
-    line-height: 50px;
+    // line-height: 50px;
 }
 
 .inner{
@@ -24,10 +24,6 @@
     font-weight: 600;
 }
 
-.home, .page{
-    padding: 10px 27px;
-}
-
 // action css
 .action{
     margin-right: 40px;
@@ -35,15 +31,16 @@
 
 .login{
     position: relative;
+    
     &::after{
         position: absolute;
         display: flex;
         align-items: center;
         content: ' ';
-        left: 95px;
+        left: 75px;
         top:15px;
         background-color: #000;
-        width: 1px;
+        width: 1.7px;
         height: 15px;
     }
 }
