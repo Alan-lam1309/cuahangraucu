@@ -1,10 +1,19 @@
+import { useState } from 'react';
 import images from '~/assets/images';
 import Button from '~/components/Button';
+import Login from '~/components/Login';
 import style from './Header.module.scss';
 
 function Header() {
+    const [hideLog, setHideLog] = useState(true)
+
+    const handleLogin = () => {
+        setHideLog(false)
+    }
     return (
         <header className={style.wrapper}>
+            
+            {!hideLog && <Login />}
             <div className={style.inner}>
                 <Button to={'/'}>
                     <img className={style.logo} src={images.logo} alt="logo" />
@@ -24,7 +33,7 @@ function Header() {
                     </Button>
                 </div>
                 <div className={style.action}>
-                    <Button className={style.login} text mini>
+                    <Button className={style.login} text mini onClick={handleLogin}>
                         Log in
                     </Button>
                     <Button text mini>Register</Button>
