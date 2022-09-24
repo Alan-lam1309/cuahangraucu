@@ -9,10 +9,12 @@ function Button({
     text = false,
     rounded = false,
     square = false,
-    mini=false,
+    mini = false,
     small = false,
     medium = false,
     large = false,
+    lefticon,
+    righticon,
     onClick,
     children,
     ...passProps
@@ -41,8 +43,9 @@ function Button({
 
     return (
         <Comp className={classes} {...props}>
-            
-            <span>{children}</span>
+            {lefticon && <span className={style.icon}>{lefticon}</span>}
+            <span className={style.title}>{children}</span>
+            {righticon && <span className={style.icon}>{righticon}</span>}
         </Comp>
     );
 }

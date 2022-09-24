@@ -3,10 +3,21 @@
     font-size: 20px;
 }
 
+.icon{
+    height: 100%;
+    width: 40px;
+}
+
+.icon+.title, .title+.icon{
+    padding-left: 40px;
+}
+
+// style btn
 .text{
     border: 1px solid transparent;
     background-color: transparent;
 }
+
 
 .rounded{
     align-items: center;
@@ -35,12 +46,13 @@
 }
 
 .medium{
-    padding: 15px 30px;
-    max-width: 370px;
+    padding: 15px 50px;
+    min-width: 200px;
 }
 
 .large{
+    // display: inline;
     font-size: 30px;
-    padding: 20px 80px;
-    max-width: 418px;
+    padding: 20px 50px;
+    min-width: 420px;
 }
