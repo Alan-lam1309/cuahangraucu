@@ -1,11 +1,19 @@
-import { ref, child, get, DataSnapshot } from 'firebase/database';
+import { ref, child, get, set, update, push } from 'firebase/database';
 import { database } from '~/firebase';
 
 const dbRef = ref(database);
 
-export const getaa = async (option) => {
+export const getApi = async (option) => {
     const res = await get(child(dbRef, option));
-    return res;
+    return res.val();
+};
+
+export const setApi = async (option, content = {}) => {
+    set(child(dbRef, option), content);
+};
+
+export const updateApi = async (option, content = {}) => {
+    update(child(dbRef, option), content);
 };
 
 // get(child(dbRef, `users`))
