@@ -2,18 +2,34 @@ import { useState } from 'react';
 import images from '~/assets/images';
 import Button from '~/components/Button';
 import Login from '~/components/Login';
+import Regis from '~/components/Regis';
 import style from './Header.module.scss';
 
 function Header() {
-    const [hideLog, setHideLog] = useState(false)
+    const [hideLog, setHideLog] = useState(true);
+    const [hideRegis, setHideRegis] = useState(false);
 
-    const handleLogin = () => {
-        setHideLog(false)
-    }
+    const handleHideLogin = () => {
+        if (hideLog) {
+            setHideLog(false);
+        } else {
+            setHideLog(true);
+        }
+    };
+
+    const handleHideRegis = () => {
+        if (hideRegis) {
+            setHideRegis(false);
+            setHideLog(true);
+        } else {
+            setHideRegis(true);
+        }
+    };
+
     return (
         <header className={style.wrapper}>
-            
-            {!hideLog && <Login />}
+            {!hideLog && <Login onClick={handleHideLogin} toRegis={handleHideRegis}/>}
+            {!hideRegis && <Regis onClick={handleHideRegis} />}
             <div className={style.inner}>
                 <Button to={'/'}>
                     <img className={style.logo} src={images.logo} alt="logo" />
@@ -33,10 +49,12 @@ function Header() {
                     </Button>
                 </div>
                 <div className={style.action}>
-                    <Button className={style.login} text mini onClick={handleLogin}>
+                    <Button className={style.login} text mini onClick={handleHideLogin}>
                         Log in
                     </Button>
-                    <Button text mini>Register</Button>
+                    <Button text mini onClick={handleHideRegis}>
+                        Register
+                    </Button>
                 </div>
             </div>
         </header>

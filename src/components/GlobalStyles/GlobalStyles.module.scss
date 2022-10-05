@@ -4,6 +4,7 @@
 // Set Default
 :root {
     // đặt biến
+    --font_default: 'Roboto', sans-serif;
 }
 
 *{
@@ -18,7 +19,7 @@ html {
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--font_default);
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;//tối ưu tốc độ hiển thị phông một cách nhanh nhất
