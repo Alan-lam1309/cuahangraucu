@@ -5,12 +5,6 @@ import DefaultLayout from './components/Layout/DefaultLayout';
 import * as userService from '~/api-services/userService';
 
 function App() {
-    const fetchAPI = async () => {
-        
-        const result1 = await userService.get();
-        console.log(result1);
-    };
-    fetchAPI();
     return (
         <Router>
             <div>

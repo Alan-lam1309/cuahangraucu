@@ -5,7 +5,7 @@ import Login from '~/components/Login';
 import style from './Header.module.scss';
 
 function Header() {
-    const [hideLog, setHideLog] = useState(true)
+    const [hideLog, setHideLog] = useState(false)
 
     const handleLogin = () => {
         setHideLog(false)
