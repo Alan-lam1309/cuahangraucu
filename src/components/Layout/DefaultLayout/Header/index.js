@@ -7,11 +7,14 @@ import style from './Header.module.scss';
 
 function Header() {
     const [hideLog, setHideLog] = useState(true);
-    const [hideRegis, setHideRegis] = useState(false);
+    const [hideRegis, setHideRegis] = useState(true);
+    const [login, setLogin] = useState(false);
+    const [account, setAccount] = useState({})
 
     const handleHideLogin = () => {
         if (hideLog) {
             setHideLog(false);
+            setHideRegis(true);
         } else {
             setHideLog(true);
         }
@@ -26,10 +29,16 @@ function Header() {
         }
     };
 
+    const handleLogin = (dataAcc) => {
+        setHideLog(true);
+        setLogin(true);
+        setAccount(dataAcc)
+    };
+
     return (
         <header className={style.wrapper}>
-            {!hideLog && <Login onClick={handleHideLogin} toRegis={handleHideRegis}/>}
-            {!hideRegis && <Regis onClick={handleHideRegis} />}
+            {!hideLog && <Login onClick={handleHideLogin} toRegis={handleHideRegis} success={handleLogin}/>}
+            {!hideRegis && <Regis onClick={handleHideRegis} toLogin={handleHideLogin} />}
             <div className={style.inner}>
                 <Button to={'/'}>
                     <img className={style.logo} src={images.logo} alt="logo" />
@@ -48,14 +57,28 @@ function Header() {
                         Contact
                     </Button>
                 </div>
-                <div className={style.action}>
-                    <Button className={style.login} text mini onClick={handleHideLogin}>
-                        Log in
-                    </Button>
-                    <Button text mini onClick={handleHideRegis}>
-                        Register
-                    </Button>
-                </div>
+                {login ? (
+                    <div className={style.action}>
+                        <Button  text mini onClick={handleHideLogin}>
+                            Giỏ hàng
+                        </Button>
+                        <Button className={style.login} text mini onClick={handleHideLogin}>
+                            {account.name}
+                        </Button>
+                        <Button text mini onClick={handleHideRegis}>
+                            Logout
+                        </Button>
+                    </div>
+                ) : (
+                    <div className={style.action}>
+                        <Button className={style.login} text mini onClick={handleHideLogin}>
+                            Log in
+                        </Button>
+                        <Button text mini onClick={handleHideRegis}>
+                            Register
+                        </Button>
+                    </div>
+                )}
             </div>
         </header>
     );

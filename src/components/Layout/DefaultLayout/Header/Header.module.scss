@@ -33,15 +33,11 @@
     position: relative;
     
     &::after{
-        position: absolute;
-        display: flex;
-        align-items: center;
         content: ' ';
-        left: 75px;
-        top:15px;
+        margin-left: 20px;
         background-color: #000;
         width: 1.7px;
-        height: 15px;
+        height: 25px;
     }
 }
 

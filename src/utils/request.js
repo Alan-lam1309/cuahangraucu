@@ -1,4 +1,4 @@
-import { ref, child, get, set, update, push } from 'firebase/database';
+import { ref, child, get, set, update } from 'firebase/database';
 import { database } from '~/firebase';
 
 const dbRef = ref(database);

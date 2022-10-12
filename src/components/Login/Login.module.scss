@@ -93,11 +93,18 @@
             font-size: 14px;
         }
     }
+
+    .error{
+        font-size: 12px;
+        list-style:square;
+        color: crimson;
+    }
     
     .submit{
         width: 100%;
         margin: 20px 0;
     }
+    
     .regis{
         display: flex;
         font-size: 14px;

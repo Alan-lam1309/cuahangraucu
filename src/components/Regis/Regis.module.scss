@@ -90,10 +90,18 @@
             display: flex;
         }
     }
-    
+
+    .error{
+        font-size: 12px;
+        list-style:square;
+        color: crimson;
+    }
+
     .submit{
         width: 100%;
         margin: 20px 0;
     }
+
+
 }
 
