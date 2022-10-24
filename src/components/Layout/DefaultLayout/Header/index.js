@@ -9,7 +9,8 @@ function Header() {
     const [hideLog, setHideLog] = useState(true);
     const [hideRegis, setHideRegis] = useState(true);
     const [login, setLogin] = useState(false);
-    const [account, setAccount] = useState({})
+    const [account, setAccount] = useState({});
+
 
     const handleHideLogin = () => {
         if (hideLog) {
