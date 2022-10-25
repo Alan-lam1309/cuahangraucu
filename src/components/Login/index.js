@@ -56,10 +56,11 @@ function Login({ onClick, toRegis, success }) {
                     <div className={style.welcome}>Welcome back to </div>
                     <div className={style.veggo}>Veggo</div>
                 </div>
+
                 <form onSubmit={handleSubmit(onSubmit)} className={style.login}>
                     <div>
                         <div className={style.title}>Login</div>
-                        <p className={style.label}>EMAIL</p>
+                        <p className={style.label}>Email</p>
                         <input
                             className={style.input}
                             name='email'
@@ -100,6 +101,7 @@ function Login({ onClick, toRegis, success }) {
                         </Button>
                     </div>
                 </form>
+                
             </div>
         </div>
     );
