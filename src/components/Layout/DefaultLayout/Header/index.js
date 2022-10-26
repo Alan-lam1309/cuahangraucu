@@ -33,8 +33,12 @@ function Header() {
     const handleLogin = (dataAcc) => {
         setHideLog(true);
         setLogin(true);
-        setAccount(dataAcc)
+        setAccount(dataAcc.user.displayName)
     };
+
+    const handleLogout =() => {
+        setLogin(false);
+    }
 
     return (
         <header className={style.wrapper}>
@@ -64,9 +68,9 @@ function Header() {
                             Giỏ hàng
                         </Button>
                         <Button className={style.login} text mini onClick={handleHideLogin}>
-                            {account.name}
+                            {account}
                         </Button>
-                        <Button text mini onClick={handleHideRegis}>
+                        <Button text mini onClick={handleLogout}>
                             Logout
                         </Button>
                     </div>

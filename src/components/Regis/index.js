@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { auth } from '~/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword , updateProfile} from 'firebase/auth';
 
 import * as userService from '~/api-services/userService';
 import Button from '../Button';
@@ -16,28 +16,28 @@ function Regis({ onClick, toLogin }) {
 
     const onSubmit = (data) => {
         fetchAPi(data);
-        // alert("Đã đăng kí thành công với email "+data.email);
-        toLogin()
+        toLogin();
     };
-
 
     const fetchAPi = async (data) => {
-        const getAPI = await userService.get();
-        if(!getAPI){
-            await userService.update(0, {...data, id: 0, available: true});
-        }else{
-            const resultAPI = Object.values(getAPI)
-            const lastItem = resultAPI[resultAPI.length - 1].id;
-            alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
-            await userService.update(lastItem + 1, {...data, id: lastItem + 1, available: true});
-            const temp = await createUserWithEmailAndPassword(auth, data.email, data.password);
-            console.log(temp.user);
-        }
-        
-    };
+        // Authetication
+        await createUserWithEmailAndPassword(auth, data.email, data.password);
+        await updateProfile(auth.currentUser, {
+            displayName: data.name,
+        });
+        alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
 
-    
-    
+        // //Realtime
+        // const getAPI = await userService.get();
+        // if(!getAPI){
+        //     await userService.update(0, {...data, id: 0, available: true});
+        // }else{
+        //     const resultAPI = Object.values(getAPI)
+        //     const lastItem = resultAPI[resultAPI.length - 1].id;
+        //     await userService.update(lastItem + 1, {...data, id: lastItem + 1, available: true});
+        //     alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
+        // }
+    };
 
     return (
         <div className={style.wrapper}>

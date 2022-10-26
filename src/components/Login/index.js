@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form';
+import { auth } from '~/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 import Button from '../Button';
 import images from '~/assets/images';
@@ -14,29 +16,42 @@ function Login({ onClick, toRegis, success }) {
         formState: { errors },
     } = useForm();
 
-    const [incorrect, setIncorrect] = useState(false)
+    const [incorrect, setIncorrect] = useState(false);
 
-    const fetchAPI = async(data)=>{
-        const getAPI = await userService.get();
-        if(!getAPI){
-            alert('Chưa có tài khoản nào!!!!')
-        }else{
-            const resultsAPI = Object.values(getAPI)
-            for(var i=0; i<resultsAPI.length; i++){
-                if(resultsAPI[i].email === data.email && resultsAPI[i].password === data.password){
-                    success(resultsAPI[i])
-                    break
-                }else if(i == resultsAPI.length - 1){
-                    setIncorrect(true)
-                }
+    const fetchAPI = async (data) => {
+        // Authentication
+        try {
+            const result = await signInWithEmailAndPassword(auth, data.email, data.password);
+            if (result) {
+                success(result);
+            } else {
+                setIncorrect(true);
             }
-            resultsAPI.map((result)=>{
-                
-            })
+        } catch (error) {
+            console.log('Sai kia');
         }
-    }
+
+        // //Realtime
+        // const getAPI = await userService.get();
+        // if(!getAPI){
+        //     alert('Chưa có tài khoản nào!!!!')
+        // }else{
+        //     const resultsAPI = Object.values(getAPI)
+        //     for(var i=0; i<resultsAPI.length; i++){
+        //         if(resultsAPI[i].email === data.email && resultsAPI[i].password === data.password){
+        //             success(resultsAPI[i])
+        //             break
+        //         }else if(i == resultsAPI.length - 1){
+        //             setIncorrect(true)
+        //         }
+        //     }
+        //     resultsAPI.map((result)=>{
+
+        //     })
+        // }
+    };
     const onSubmit = (data) => {
-        fetchAPI(data)
+        fetchAPI(data);
     };
 
     return (
@@ -63,15 +78,20 @@ function Login({ onClick, toRegis, success }) {
                         <p className={style.label}>Email</p>
                         <input
                             className={style.input}
-                            name='email'
-                            type='email'
+                            name="email"
+                            type="email"
                             {...register('email', {
                                 required: true,
                                 pattern: /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/i,
                             })}
                         />
                         <p className={style.label}>PASSWORD</p>
-                        <input className={style.input} name='password' type='password' {...register('password', { required: true, minLength: 6 })} />
+                        <input
+                            className={style.input}
+                            name="password"
+                            type="password"
+                            {...register('password', { required: true, minLength: 6 })}
+                        />
                     </div>
                     <div className={style.action}>
                         <div className={style.checkRemember}>
