@@ -1,6 +1,8 @@
 import Header from './Header';
 import Sidebar from './Sidebar';
+import Footer from './Footer';
 import style from '~/components/Layout/DefaultLayout/DefaultLayout.module.scss'
+
 
 function DefaultLayout({ children }) {
     return (
@@ -10,7 +12,14 @@ function DefaultLayout({ children }) {
                 <Sidebar />
                 <div className={style.content}>{children}</div>
             </div>
+            
+            <footer className={style.footer}></footer>
+            <Footer />
+
+            
+            
         </div>
+
     );
 }
 
