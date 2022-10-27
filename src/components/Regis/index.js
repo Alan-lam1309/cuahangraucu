@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { memo } from 'react';
-
-import { auth } from '~/firebase';
+import { auth, provider } from '~/firebase';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { createUserWithEmailAndPassword , updateProfile} from 'firebase/auth';
 
 // import * as userService from '~/api-services/userService';
@@ -9,7 +9,7 @@ import Button from '../Button';
 import images from '~/assets/images';
 import style from './Regis.module.scss';
 
-function Regis({ onClick, toLogin }) {
+function Regis({ onClick, toLogin , success}) {
     const {
         register,
         handleSubmit,
@@ -20,6 +20,11 @@ function Regis({ onClick, toLogin }) {
         fetchAPi(data);
         toLogin();
     };
+
+    const handleGoogle = async()=>{
+        const resultGG = await signInWithPopup(auth, provider);
+        success(resultGG)
+    }
 
     const fetchAPi = async (data) => {
         // Authetication
@@ -45,7 +50,7 @@ function Regis({ onClick, toLogin }) {
         <div className={style.wrapper}>
             <div className={style.inner}>
                 <Button text onClick={onClick} className={style.close}>
-                    close{' '}
+                    <img src={images.close} alt="close" className={style.closeimage} />
                 </Button>
                 <div className={style.header}>
                     <img src={images.v} alt="v" className={style.veo} />
@@ -106,6 +111,16 @@ function Regis({ onClick, toLogin }) {
                     <Button type="submit" className={style.submit} rounded medium>
                         Sign Up
                     </Button>
+
+                    <div className={style.Test_Or}>OR</div>
+                    <Button text className={style.submit_google} rounded  onClick={handleGoogle}>
+                        <div className={style.submit_google_text}>
+                            <img src={images.google} alt="googleicon" className={style.googleiconlogin}/>
+                            Continue With Google
+                        </div>
+
+                    </Button>
+
                 </form>
             </div>
         </div>
