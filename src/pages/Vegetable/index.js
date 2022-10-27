@@ -78,7 +78,7 @@ function Vegetable() {
             </header>
             <div className={style.products}>
                 {results.map((result) => (
-                    <div className={style.product}>
+                    <div key={result.id} className={style.product}>
                         <img src={result.image} alt="image" className={style.image} />
                         <div className={style.name} >{result.name}</div>
                         <div className={style.price}>

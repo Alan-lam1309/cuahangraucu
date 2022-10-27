@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { auth } from '~/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, provider } from '~/firebase';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { memo } from 'react';
 
 
@@ -20,6 +20,10 @@ function Login({ onClick, toRegis, success }) {
 
     const [incorrect, setIncorrect] = useState(false);
 
+    const handleGoogle = async()=>{
+        const resultGG = await signInWithPopup(auth, provider);
+        success(resultGG)
+    }
     const fetchAPI = async (data) => {
         // Authentication
             const result = await signInWithEmailAndPassword(auth, data.email, data.password);
@@ -96,8 +100,8 @@ function Login({ onClick, toRegis, success }) {
                             <input type="checkbox" />
                             <div>Remember me</div>
                         </div>
-                        <Button text className={style.forget}>
-                            Forget Password?
+                        <Button text className={style.forget} onClick={handleGoogle}>
+                            Google
                         </Button>
                     </div>
                     {Object.keys(errors).length !== 0 && (
