@@ -3,9 +3,7 @@ import { memo } from 'react';
 
 import images from '~/assets/images';
 import Button from '~/components/Button';
-import Footer from '~/components/Layout/DefaultLayout/Footer';
 import style from './Home.module.scss';
-
 function Home() {
     return (
         <div className={style.wrapper}>
@@ -111,15 +109,7 @@ function Home() {
                 </div>
             </div>
 
-<<<<<<< Updated upstream
             <div className={style.clear}></div>
-=======
-                <div className={style.clear}></div> 
-
-                
-
-                <Footer></Footer>
->>>>>>> Stashed changes
 
             <footer>
                 <img src={images.paypal} alt="paypal" className={style.paypal} />
