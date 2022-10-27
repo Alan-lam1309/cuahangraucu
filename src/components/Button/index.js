@@ -1,6 +1,7 @@
-import style from './Button.module.scss';
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import style from './Button.module.scss';
 
 function Button({
     to,
@@ -50,4 +51,4 @@ function Button({
     );
 }
 
-export default Button;
+export default memo(Button);

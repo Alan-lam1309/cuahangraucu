@@ -1,8 +1,10 @@
 import { useForm } from 'react-hook-form';
+import { memo } from 'react';
+
 import { auth } from '~/firebase';
 import { createUserWithEmailAndPassword , updateProfile} from 'firebase/auth';
 
-import * as userService from '~/api-services/userService';
+// import * as userService from '~/api-services/userService';
 import Button from '../Button';
 import images from '~/assets/images';
 import style from './Regis.module.scss';
@@ -110,4 +112,4 @@ function Regis({ onClick, toLogin }) {
     );
 }
 
-export default Regis;
+export default memo(Regis);

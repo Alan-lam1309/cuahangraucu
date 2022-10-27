@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo} from 'react';
 import images from '~/assets/images';
 import Button from '~/components/Button';
 import Login from '~/components/Login';
@@ -55,8 +55,8 @@ function Header() {
                     <Button to={'/aboutUs'} text small className={style.page}>
                         About
                     </Button>
-                    <Button to={'/howtoshop'} text small className={style.page}>
-                        How to shop
+                    <Button to={'/vegetable'} text small className={style.page}>
+                        Shopping
                     </Button>
                     <Button to={'/contact'} text small className={style.page}>
                         Contact
@@ -65,7 +65,7 @@ function Header() {
                 {login ? (
                     <div className={style.action}>
                         <Button  text mini onClick={handleHideLogin}>
-                            Giỏ hàng
+                            Cart
                         </Button>
                         <Button className={style.login} text mini onClick={handleHideLogin}>
                             {account}
@@ -89,4 +89,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default memo(Header);

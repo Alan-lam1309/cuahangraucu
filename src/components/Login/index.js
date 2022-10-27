@@ -1,13 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { auth } from '~/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { memo } from 'react';
+
 
 import Button from '../Button';
 import images from '~/assets/images';
-import * as userService from '~/api-services/userService';
+// import * as userService from '~/api-services/userService';
 import style from './Login.module.scss';
 import { useState } from 'react';
-import { endAt } from 'firebase/database';
+// import { endAt } from 'firebase/database';
 
 function Login({ onClick, toRegis, success }) {
     const {
@@ -20,18 +22,14 @@ function Login({ onClick, toRegis, success }) {
 
     const fetchAPI = async (data) => {
         // Authentication
-        try {
             const result = await signInWithEmailAndPassword(auth, data.email, data.password);
             if (result) {
                 success(result);
             } else {
                 setIncorrect(true);
             }
-        } catch (error) {
-            console.log('Sai kia');
-        }
 
-        // //Realtime
+        // Realtime
         // const getAPI = await userService.get();
         // if(!getAPI){
         //     alert('Chưa có tài khoản nào!!!!')
@@ -82,7 +80,7 @@ function Login({ onClick, toRegis, success }) {
                             type="email"
                             {...register('email', {
                                 required: true,
-                                pattern: /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/i,
+                                pattern: /^[a-z][a-z0-9_/.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/i,
                             })}
                         />
                         <p className={style.label}>PASSWORD</p>
@@ -127,4 +125,4 @@ function Login({ onClick, toRegis, success }) {
     );
 }
 
-export default Login;
+export default memo(Login);
