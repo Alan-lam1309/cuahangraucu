@@ -17,19 +17,6 @@ export const updateApi = async (option, content = {}) => {
     update(child(dbRef, option), content);
 };
 
-// var firebase = require('firebase');
-// var firebaseui = require('firebaseui');
-// var ui = new firebaseui.auth.AuthUI(firebase.auth());
-// ui.start('#firebaseui-auth-container', {
-//     signInOptions: [
-//         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-//         {
-//             provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-//             requireDisplayName: false,
-//         },
-//     ],
-//     // Other config options...
-// });
 
 
 

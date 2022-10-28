@@ -1,5 +1,5 @@
 .wrapper{
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 100%;
     z-index: 9;
@@ -7,7 +7,7 @@
 }
 
 .inner{
-    margin: 5% auto ;
+    margin: 1% auto ;
     min-width: 300px;
     max-width: 500px;
     background-color: white;
@@ -18,17 +18,18 @@
     justify-content: flex-end;
     width: 100%;
 }
+
 .closeimage
 {
     max-width: 30px;
-    margin: 16px;
+    margin: 5px;
 }
 
 .header{
     display: flex;
     flex-direction: row;
     justify-content:center;
-    padding: 15px 30px;
+    padding: 10px 30px;
 
     .veo{
         padding-bottom: 34px;

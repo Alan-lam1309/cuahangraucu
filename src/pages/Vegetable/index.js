@@ -7,20 +7,7 @@ import style from './Vegetable.module.scss';
 function Vegetable() {
     const [type, setType] = useState('All');
     const [results, setResult] = useState([]);
-
-    const handleType1 = () => {
-        setType('All');
-    };
-    const handleType2 = () => {
-        setType('Vegetable');
-    };
-    const handleType3 = () => {
-        setType('Fruit');
-    };
-    const handleType4 = () => {
-        setType('Spice');
-    };
-
+    
     const fetchAPI = async () => {
         const getAPI = await productService.get();
         const result = Object.values(getAPI);
@@ -44,7 +31,7 @@ function Vegetable() {
                         All style
                     </Button>
                 ) : (
-                    <Button text onClick={handleType1}>
+                    <Button text onClick={()=>{setType('All');}}>
                         All style
                     </Button>
                 )}
@@ -53,7 +40,7 @@ function Vegetable() {
                         Vegetables
                     </Button>
                 ) : (
-                    <Button text onClick={handleType2}>
+                    <Button text onClick={()=>{setType('Vegetable');}}>
                         Vegetables
                     </Button>
                 )}
@@ -62,7 +49,7 @@ function Vegetable() {
                         Fruits
                     </Button>
                 ) : (
-                    <Button text onClick={handleType3}>
+                    <Button text onClick={()=>{setType('Fruit');}}>
                         Fruits
                     </Button>
                 )}
@@ -71,7 +58,7 @@ function Vegetable() {
                         Spices
                     </Button>
                 ) : (
-                    <Button text onClick={handleType4}>
+                    <Button text onClick={()=>{setType('Spice');}}>
                         Spices
                     </Button>
                 )}
@@ -79,7 +66,7 @@ function Vegetable() {
             <div className={style.products}>
                 {results.map((result) => (
                     <div key={result.id} className={style.product}>
-                        <img src={result.image} alt="image" className={style.image} />
+                        <img src={result.image} alt="imaaage" className={style.image}></img>
                         <div className={style.name} >{result.name}</div>
                         <div className={style.price}>
                             {result.price}/{result.unit}

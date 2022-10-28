@@ -1,30 +1,63 @@
 import { useForm } from 'react-hook-form';
 import { memo } from 'react';
-import { auth, provider } from '~/firebase';
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth } from '~/firebase';
+<<<<<<< Updated upstream
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+=======
 import { createUserWithEmailAndPassword , updateProfile} from 'firebase/auth';
+>>>>>>> Stashed changes
 
-// import * as userService from '~/api-services/userService';
+import * as userService from '~/api-services/userService';
 import Button from '../Button';
 import images from '~/assets/images';
 import style from './Regis.module.scss';
 
-function Regis({ onClick, toLogin , success}) {
+function Regis({ onClick, toLogin }) {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
+<<<<<<< Updated upstream
+    const fetchAPi = async (data) => {
+        var same = 0;
+        //Realtime
+        const getAPI = await userService.get();
+        if (!getAPI) {
+            // Authetication
+            const result = await createUserWithEmailAndPassword(auth, data.email, data.password);
+            await updateProfile(auth.currentUser, { displayName: data.name });
+            //
+            await userService.update(0, { ...data, id: result.user.uid, available: true });
+            alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
+        } else {
+            const resultAPI = Object.values(getAPI);
+            resultAPI.forEach((result) => {
+                if (result.email === data.email) {
+                    alert('Email đã tồn tại');
+                    same++;
+                }
+            });
+            if (same === 0) {
+                // Authetication
+                const result = await createUserWithEmailAndPassword(auth, data.email, data.password);
+                await updateProfile(auth.currentUser, { displayName: data.name });
+                //
+                await userService.update(resultAPI.length, { ...data, id: result.user.uid, available: true });
+                alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
+            }
+        }
+    };
+
+    const onSubmit = (data) => {
+        fetchAPi(data);
+        toLogin();
+=======
     const onSubmit = (data) => {
         fetchAPi(data);
         toLogin();
     };
-
-    const handleGoogle = async()=>{
-        const resultGG = await signInWithPopup(auth, provider);
-        success(resultGG)
-    }
 
     const fetchAPi = async (data) => {
         // Authetication
@@ -44,6 +77,7 @@ function Regis({ onClick, toLogin , success}) {
         //     await userService.update(lastItem + 1, {...data, id: lastItem + 1, available: true});
         //     alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
         // }
+>>>>>>> Stashed changes
     };
 
     return (
@@ -69,7 +103,7 @@ function Regis({ onClick, toLogin , success}) {
                         <p className={style.label}>NAME</p>
                         <input
                             className={style.input}
-                            name="name" 
+                            name="name"
                             type="text"
                             {...register('name', {
                                 required: true,
@@ -86,12 +120,7 @@ function Regis({ onClick, toLogin , success}) {
                             })}
                         />
                         <p className={style.label}>PASSWORD</p>
-                        <input
-                            className={style.input}
-                            name="password"
-                            type="password"
-                            {...register('password', { required: true, minLength: 6 })}
-                        />
+                        <input className={style.input} name="password" type="password" {...register('password', { required: true, minLength: 6 })} />
                     </div>
                     <div className={style.action}>
                         <div className={style.checkRemember}>
@@ -111,16 +140,12 @@ function Regis({ onClick, toLogin , success}) {
                     <Button type="submit" className={style.submit} rounded medium>
                         Sign Up
                     </Button>
-
-                    <div className={style.Test_Or}>OR</div>
-                    <Button text className={style.submit_google} rounded  onClick={handleGoogle}>
-                        <div className={style.submit_google_text}>
-                            <img src={images.google} alt="googleicon" className={style.googleiconlogin}/>
-                            Continue With Google
-                        </div>
-
-                    </Button>
-
+                    <div className={style.regis}>
+                        <div>Have your account?</div>
+                        <Button onClick={toLogin} className={style.regisLink} text>
+                            Get Sign In
+                        </Button>
+                    </div>
                 </form>
             </div>
         </div>

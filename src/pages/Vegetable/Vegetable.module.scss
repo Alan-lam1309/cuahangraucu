@@ -1,7 +1,8 @@
 .wrapper{
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .header{
@@ -10,8 +11,10 @@
     align-items: center;
     width: 50%;
     font-size: 18px;
-    // background-color: aqua;
+    border-bottom: 2px solid green;
+    border-top: 2px solid green;
 }
+
 
 .selected{
     font-size: 21px;
@@ -34,6 +37,7 @@
         margin: 20px 100px;
         border: 1px solid gray;
         border-radius: 10px;
+        background-color: #FFEDCC;
     }
 
     .image{
@@ -48,6 +52,11 @@
     }
     .price{
         padding-left: 10px;
+        margin-bottom: 10px ;
         font-size: 16px;
+        width: 75%;
+        border-radius: 20px;
+        color: #fff;
+        background-color: red;
     }
 }
