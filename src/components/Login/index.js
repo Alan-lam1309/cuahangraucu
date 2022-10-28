@@ -1,13 +1,8 @@
 import { useForm } from 'react-hook-form';
-<<<<<<< Updated upstream
 import { auth, provider } from '~/firebase';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { memo } from 'react';
 
-=======
-import { auth } from '~/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
->>>>>>> Stashed changes
 
 import Button from '../Button';
 import images from '~/assets/images';
@@ -24,7 +19,6 @@ function Login({ onClick, toRegis, success }) {
     } = useForm();
 
     const [incorrect, setIncorrect] = useState(false);
-<<<<<<< Updated upstream
     const [byGG, setbyGG] = useState(false);
 
     const handleGoogle = async () => {
@@ -60,23 +54,6 @@ function Login({ onClick, toRegis, success }) {
         }
 
         // Realtime
-=======
-
-    const fetchAPI = async (data) => {
-        // Authentication
-        try {
-            const result = await signInWithEmailAndPassword(auth, data.email, data.password);
-            if (result) {
-                success(result);
-            } else {
-                setIncorrect(true);
-            }
-        } catch (error) {
-            console.log('Sai kia');
-        }
-
-        // //Realtime
->>>>>>> Stashed changes
         // const getAPI = await userService.get();
         // if(!getAPI){
         //     alert('Chưa có tài khoản nào!!!!')
@@ -95,17 +72,12 @@ function Login({ onClick, toRegis, success }) {
         //     })
         // }
     };
-<<<<<<< Updated upstream
     const onSubmit = (data = '') => {
         if (byGG) {
             handleGoogle();
         } else {
             fetchAPI(data);
         }
-=======
-    const onSubmit = (data) => {
-        fetchAPI(data);
->>>>>>> Stashed changes
     };
 
     return (
@@ -134,7 +106,6 @@ function Login({ onClick, toRegis, success }) {
                             className={style.input}
                             name="email"
                             type="email"
-<<<<<<< Updated upstream
                             {...(!byGG &&
                                 register('email', {
                                     required: true,
@@ -143,20 +114,6 @@ function Login({ onClick, toRegis, success }) {
                         />
                         <p className={style.label}>PASSWORD</p>
                         <input className={style.input} name="password" type="password" {...(!byGG && register('password', { required: true, minLength: 6 }))} />
-=======
-                            {...register('email', {
-                                required: true,
-                                pattern: /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/i,
-                            })}
-                        />
-                        <p className={style.label}>PASSWORD</p>
-                        <input
-                            className={style.input}
-                            name="password"
-                            type="password"
-                            {...register('password', { required: true, minLength: 6 })}
-                        />
->>>>>>> Stashed changes
                     </div>
                     <div className={style.action}>
                         <div className={style.checkRemember}>

@@ -33,15 +33,7 @@ function Header() {
     const handleLogin = (dataAcc) => {
         setHideLog(true);
         setLogin(true);
-<<<<<<< Updated upstream
         setAccount(dataAcc.user.displayName);
-    };
-
-    const handleLogout = () => {
-        setLogin(false);
-=======
-        setAccount(dataAcc.user.displayName)
->>>>>>> Stashed changes
     };
 
     const handleLogout =() => {
@@ -133,11 +125,7 @@ function Header() {
                         <Button text mini>
                             Cart
                         </Button>
-<<<<<<< Updated upstream
-                        <Button className={style.login} text mini>
-=======
                         <Button className={style.login} text mini onClick={handleHideLogin}>
->>>>>>> Stashed changes
                             {account}
                         </Button>
                         <Button text mini onClick={handleLogout}>

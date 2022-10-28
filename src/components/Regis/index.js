@@ -1,11 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { memo } from 'react';
 import { auth } from '~/firebase';
-<<<<<<< Updated upstream
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-=======
-import { createUserWithEmailAndPassword , updateProfile} from 'firebase/auth';
->>>>>>> Stashed changes
 
 import * as userService from '~/api-services/userService';
 import Button from '../Button';
@@ -19,7 +15,6 @@ function Regis({ onClick, toLogin }) {
         formState: { errors },
     } = useForm();
 
-<<<<<<< Updated upstream
     const fetchAPi = async (data) => {
         var same = 0;
         //Realtime
@@ -49,36 +44,11 @@ function Regis({ onClick, toLogin }) {
             }
         }
     };
-
-    const onSubmit = (data) => {
-        fetchAPi(data);
-        toLogin();
-=======
     const onSubmit = (data) => {
         fetchAPi(data);
         toLogin();
     };
 
-    const fetchAPi = async (data) => {
-        // Authetication
-        await createUserWithEmailAndPassword(auth, data.email, data.password);
-        await updateProfile(auth.currentUser, {
-            displayName: data.name,
-        });
-        alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
-
-        // //Realtime
-        // const getAPI = await userService.get();
-        // if(!getAPI){
-        //     await userService.update(0, {...data, id: 0, available: true});
-        // }else{
-        //     const resultAPI = Object.values(getAPI)
-        //     const lastItem = resultAPI[resultAPI.length - 1].id;
-        //     await userService.update(lastItem + 1, {...data, id: lastItem + 1, available: true});
-        //     alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
-        // }
->>>>>>> Stashed changes
-    };
 
     return (
         <div className={style.wrapper}>
