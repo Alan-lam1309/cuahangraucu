@@ -1,0 +1,84 @@
+.wrapper{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    background-color: rgba($color: #000000, $alpha: 0.7);
+}
+
+.inner{
+    margin: 1% 37% ;
+    min-width: 400px;
+    max-width: 500px;
+    background-color: white;
+    position: fixed;
+}
+
+.close{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.closeimage
+{
+    max-width: 20px;
+    margin: 5px;
+}
+
+.buy{
+    width: 55%;
+    margin: 0 auto;
+
+    .welcomeveggo{
+        display: flex;
+        justify-content:center;
+        flex-direction: row;
+        font-size: 16px;
+        font-style: italic;
+    }
+
+    .image{
+        height: 200px;
+        width: 250px;
+        background-color: aqua;
+    }
+
+    .title{
+        display: flex;
+        justify-content:center;
+        font-size: 50px;
+        font-weight: 300;
+    }
+
+    .label{
+        font-size: 13px;
+        margin-bottom: -8px;
+        margin-top: 14px;
+        color: #4F4F4F;
+    }
+    
+    .submit{
+        width: 100%;
+        margin: 20px 0;
+    }
+    .error{
+        font-size: 12px;
+        list-style:square;
+        color: crimson;
+    }
+
+    .name{
+        font-size: 38px;
+        font-weight: 500;
+    }
+    .price{
+        padding-left: 10px;
+        margin-bottom: 10px ;
+        font-size: 16px;
+        width: 75%;
+        border-radius: 20px;
+        color: #fff;
+        background-color: red;
+    }
+}
