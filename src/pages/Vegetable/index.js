@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import * as productService from '~/api-services/productService';
 import Detail from '~/components/Detail';
+import Footer from '~/components/Layout/DefaultLayout/Footer';
 import Button from '~/components/Button';
 import style from './Vegetable.module.scss';
 
@@ -72,6 +73,7 @@ function Vegetable() {
                     </Button>
                 )}
             </header>
+            
             <div className={style.products}>
                 {results.map((result) => (
                     <div key={result.id} className={style.product}>
@@ -80,11 +82,15 @@ function Vegetable() {
                         <div className={style.price}>
                             {result.price}/{result.unit}
                         </div>
-                        <Button small rounded onClick={() => {handleDetail(result)}} >
+                        <Button className={style.btnAddtoCart} large rounded onClick={() => {handleDetail(result)}} >
                             Add To Cart
                         </Button>
                     </div>
                 ))}
+            </div>
+
+            <div className={style.footer}>
+            <Footer />
             </div>
             
         </div>

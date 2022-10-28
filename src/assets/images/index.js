@@ -11,6 +11,7 @@ const images = {
     googleplay : require('~/assets/images/imgHome/googleplaydown.svg').default,
     appstore : require('~/assets/images/imgHome/appstoredown.svg').default,
     aboutus : require('~/assets/images/imgHome/aboutus.svg').default,
+    test : require('~/assets/images/imgHome/test.svg').default,
     hinh1: require('~/assets/images/imgHome/hinh1.png'),
     hinh2: require('~/assets/images/imgHome/hinh2.png'),
     hinh3: require('~/assets/images/imgHome/hinh3.png'),
