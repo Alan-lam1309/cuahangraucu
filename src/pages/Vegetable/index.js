@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 
 import * as productService from '~/api-services/productService';
+import Detail from '~/components/Detail';
 import Button from '~/components/Button';
 import style from './Vegetable.module.scss';
 
 function Vegetable() {
     const [type, setType] = useState('All');
     const [results, setResult] = useState([]);
+    const [detail, setDetail] = useState(false);
+    const [dataDetail, setDataDetail] = useState();
     
     const fetchAPI = async () => {
         const getAPI = await productService.get();
@@ -23,12 +26,18 @@ function Vegetable() {
         fetchAPI();
     }, [type]);
 
+    const handleDetail = (data) =>{
+        setDetail(true);
+        setDataDetail(data);
+    }
+    
     return (
         <div className={style.wrapper}>
+            {detail && <Detail onClick={()=>{setDetail(false)}} data={dataDetail} />}
             <header className={style.header}>
                 {type === 'All' ? (
                     <Button text className={style.selected}>
-                        All style
+                        All type
                     </Button>
                 ) : (
                     <Button text onClick={()=>{setType('All');}}>
@@ -71,12 +80,13 @@ function Vegetable() {
                         <div className={style.price}>
                             {result.price}/{result.unit}
                         </div>
-                        <Button small rounded >
-                            BUY
+                        <Button small rounded onClick={() => {handleDetail(result)}} >
+                            Add To Cart
                         </Button>
                     </div>
                 ))}
             </div>
+            
         </div>
     );
 }
