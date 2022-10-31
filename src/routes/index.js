@@ -1,4 +1,4 @@
-import { Home, Contact, AboutUs, Howtoshop, Vegetable } from '~/pages';
+import { Home, Contact, AboutUs, Vegetable, Cart } from '~/pages';
 import HeaderOnly from '~/components/Layout/HeaderOnly';
 
 // Không cần đăng nhập mới xem đc
@@ -7,7 +7,9 @@ export const publicRoutes = [
     { path: '/aboutUs', component: AboutUs, Layout: HeaderOnly },
     { path: '/contact', component: Contact, Layout: HeaderOnly },
     { path: '/vegetable', component: Vegetable, Layout: HeaderOnly },
-    { path: '/howtoshop', component: Howtoshop, Layout: HeaderOnly },
+    { path: '/cart', component: Cart, Layout: HeaderOnly },
 ];
 // Cần đăng nhập mới xem đc
-export const privateRoutes = [];
+export const privateRoutes = [
+    { path: '/cart', component: Cart, Layout: HeaderOnly },
+];

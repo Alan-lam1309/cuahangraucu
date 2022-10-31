@@ -1,13 +1,15 @@
 import { useForm } from 'react-hook-form';
-import { auth } from '~/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, provider } from '~/firebase';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { memo } from 'react';
+
 
 import Button from '../Button';
 import images from '~/assets/images';
 import * as userService from '~/api-services/userService';
 import style from './Login.module.scss';
 import { useState } from 'react';
-import { endAt } from 'firebase/database';
+// import { endAt } from 'firebase/database';
 
 function Login({ onClick, toRegis, success }) {
     const {
@@ -17,21 +19,41 @@ function Login({ onClick, toRegis, success }) {
     } = useForm();
 
     const [incorrect, setIncorrect] = useState(false);
+    const [byGG, setbyGG] = useState(false);
 
+    const handleGoogle = async () => {
+        const resultGG = await signInWithPopup(auth, provider);
+        const getAPI = await userService.get();
+        if (!getAPI) {
+            await userService.update(0, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, available: true });
+        } else {
+            const resultAPI = Object.values(getAPI);
+            var same = 0;
+            resultAPI.forEach((result) => {
+                if (result.email === resultGG.user.email) {
+                    same++;
+                }
+            });
+            if (same === 0) {
+                await userService.update(resultAPI.length, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, available: true });
+                alert(`Bạn đã đăng kí thành công với Email:${resultGG.user.email}`);
+            } else {
+                alert(`Bạn đã đăng nhập thành công với Email:${resultGG.user.email}`);
+            }
+        }
+        success(resultGG);
+    };
     const fetchAPI = async (data) => {
         // Authentication
-        try {
-            const result = await signInWithEmailAndPassword(auth, data.email, data.password);
-            if (result) {
-                success(result);
-            } else {
-                setIncorrect(true);
-            }
-        } catch (error) {
-            console.log('Sai kia');
+        const result = await signInWithEmailAndPassword(auth, data.email, data.password);
+        if (result) {
+            alert(`Bạn đã đăng nhập thành công với Email: ${data.email}`);
+            success(result);
+        } else {
+            setIncorrect(true);
         }
 
-        // //Realtime
+        // Realtime
         // const getAPI = await userService.get();
         // if(!getAPI){
         //     alert('Chưa có tài khoản nào!!!!')
@@ -50,15 +72,19 @@ function Login({ onClick, toRegis, success }) {
         //     })
         // }
     };
-    const onSubmit = (data) => {
-        fetchAPI(data);
+    const onSubmit = (data = '') => {
+        if (byGG) {
+            handleGoogle();
+        } else {
+            fetchAPI(data);
+        }
     };
 
     return (
         <div className={style.wrapper}>
             <div className={style.inner}>
                 <Button text onClick={onClick} className={style.close}>
-                    icon{' '}
+                    <img src={images.close} alt="close" className={style.closeimage} />
                 </Button>
                 <div className={style.header}>
                     <img src={images.v} alt="v" className={style.veo} />
@@ -80,27 +106,20 @@ function Login({ onClick, toRegis, success }) {
                             className={style.input}
                             name="email"
                             type="email"
-                            {...register('email', {
-                                required: true,
-                                pattern: /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/i,
-                            })}
+                            {...(!byGG &&
+                                register('email', {
+                                    required: true,
+                                    pattern: /^[a-z][a-z0-9_/.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/i,
+                                }))}
                         />
                         <p className={style.label}>PASSWORD</p>
-                        <input
-                            className={style.input}
-                            name="password"
-                            type="password"
-                            {...register('password', { required: true, minLength: 6 })}
-                        />
+                        <input className={style.input} name="password" type="password" {...(!byGG && register('password', { required: true, minLength: 6 }))} />
                     </div>
                     <div className={style.action}>
                         <div className={style.checkRemember}>
                             <input type="checkbox" />
                             <div>Remember me</div>
                         </div>
-                        <Button text className={style.forget}>
-                            Forget Password?
-                        </Button>
                     </div>
                     {Object.keys(errors).length !== 0 && (
                         <ul className={style.error}>
@@ -111,8 +130,29 @@ function Login({ onClick, toRegis, success }) {
                         </ul>
                     )}
                     {incorrect && <p>Email or password is incorrect</p>}
-                    <Button className={style.submit} rounded medium>
+                    <Button
+                        className={style.submit}
+                        rounded
+                        medium
+                        onClick={() => {
+                            setbyGG(false);
+                        }}
+                    >
                         Login
+                    </Button>
+                    <div className={style.Test_Or}>OR</div>
+                    <Button
+                        text
+                        className={style.submit_google}
+                        rounded
+                        onClick={() => {
+                            setbyGG(true);
+                        }}
+                    >
+                        <div className={style.submit_google_text}>
+                            <img src={images.google} alt="googleicon" className={style.googleiconlogin} />
+                            Continue With Google
+                        </div>
                     </Button>
                     <div className={style.regis}>
                         <div>Don't have an account?</div>
@@ -121,10 +161,9 @@ function Login({ onClick, toRegis, success }) {
                         </Button>
                     </div>
                 </form>
-                
             </div>
         </div>
     );
 }
 
-export default Login;
+export default memo(Login);

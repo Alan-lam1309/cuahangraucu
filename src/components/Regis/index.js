@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
+import { memo } from 'react';
 import { auth } from '~/firebase';
-import { createUserWithEmailAndPassword , updateProfile} from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 import * as userService from '~/api-services/userService';
 import Button from '../Button';
@@ -14,36 +15,46 @@ function Regis({ onClick, toLogin }) {
         formState: { errors },
     } = useForm();
 
+    const fetchAPi = async (data) => {
+        var same = 0;
+        //Realtime
+        const getAPI = await userService.get();
+        if (!getAPI) {
+            // Authetication
+            const result = await createUserWithEmailAndPassword(auth, data.email, data.password);
+            await updateProfile(auth.currentUser, { displayName: data.name });
+            //
+            await userService.update(0, { ...data, id: result.user.uid, available: true });
+            alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
+        } else {
+            const resultAPI = Object.values(getAPI);
+            resultAPI.forEach((result) => {
+                if (result.email === data.email) {
+                    alert('Email đã tồn tại');
+                    same++;
+                }
+            });
+            if (same === 0) {
+                // Authetication
+                const result = await createUserWithEmailAndPassword(auth, data.email, data.password);
+                await updateProfile(auth.currentUser, { displayName: data.name });
+                //
+                await userService.update(resultAPI.length, { ...data, id: result.user.uid, available: true });
+                alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
+            }
+        }
+    };
     const onSubmit = (data) => {
         fetchAPi(data);
         toLogin();
     };
 
-    const fetchAPi = async (data) => {
-        // Authetication
-        await createUserWithEmailAndPassword(auth, data.email, data.password);
-        await updateProfile(auth.currentUser, {
-            displayName: data.name,
-        });
-        alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
-
-        // //Realtime
-        // const getAPI = await userService.get();
-        // if(!getAPI){
-        //     await userService.update(0, {...data, id: 0, available: true});
-        // }else{
-        //     const resultAPI = Object.values(getAPI)
-        //     const lastItem = resultAPI[resultAPI.length - 1].id;
-        //     await userService.update(lastItem + 1, {...data, id: lastItem + 1, available: true});
-        //     alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
-        // }
-    };
 
     return (
         <div className={style.wrapper}>
             <div className={style.inner}>
                 <Button text onClick={onClick} className={style.close}>
-                    close{' '}
+                    <img src={images.close} alt="close" className={style.closeimage} />
                 </Button>
                 <div className={style.header}>
                     <img src={images.v} alt="v" className={style.veo} />
@@ -62,7 +73,7 @@ function Regis({ onClick, toLogin }) {
                         <p className={style.label}>NAME</p>
                         <input
                             className={style.input}
-                            name="name" 
+                            name="name"
                             type="text"
                             {...register('name', {
                                 required: true,
@@ -79,12 +90,7 @@ function Regis({ onClick, toLogin }) {
                             })}
                         />
                         <p className={style.label}>PASSWORD</p>
-                        <input
-                            className={style.input}
-                            name="password"
-                            type="password"
-                            {...register('password', { required: true, minLength: 6 })}
-                        />
+                        <input className={style.input} name="password" type="password" {...register('password', { required: true, minLength: 6 })} />
                     </div>
                     <div className={style.action}>
                         <div className={style.checkRemember}>
@@ -104,10 +110,16 @@ function Regis({ onClick, toLogin }) {
                     <Button type="submit" className={style.submit} rounded medium>
                         Sign Up
                     </Button>
+                    <div className={style.regis}>
+                        <div>Have your account?</div>
+                        <Button onClick={toLogin} className={style.regisLink} text>
+                            Get Sign In
+                        </Button>
+                    </div>
                 </form>
             </div>
         </div>
     );
 }
 
-export default Regis;
+export default memo(Regis);
