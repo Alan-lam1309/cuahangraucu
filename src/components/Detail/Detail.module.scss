@@ -18,7 +18,9 @@
     display: flex;
     justify-content: flex-end;
     width: 100%;
+
 }
+
 
 .closeimage
 {
@@ -61,6 +63,10 @@
     .submit{
         width: 100%;
         margin: 20px 0;
+        &:hover{
+            cursor: pointer;
+            
+        }
     }
     .error{
         font-size: 12px;

@@ -74,7 +74,7 @@ function Vegetable() {
                 )}
             </header>
             
-            <div className={style.products}>
+            <div className={style.products }>
                 {results.map((result) => (
                     <div key={result.id} className={style.product}>
                         <img src={result.image} alt="imaaage" className={style.image}></img>
@@ -82,7 +82,7 @@ function Vegetable() {
                         <div className={style.price}>
                             {result.price}/{result.unit}
                         </div>
-                        <Button className={style.btnAddtoCart} large rounded onClick={() => {handleDetail(result)}} >
+                        <Button className={style.btnAddtoCart} medium rounded onClick={() => {handleDetail(result)}} >
                             Add To Cart
                         </Button>
                     </div>
