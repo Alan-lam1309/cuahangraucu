@@ -35,17 +35,18 @@ function Detail({ onClick, data }) {
                         <div className={style.action}>
                             <div>
                                 <p className={style.label}>Remaining</p>
-                                <p>sl nè</p>
+                                <p>{data.amount}</p>
                             </div>
                             <div>
                                 <p className={style.label}>Quantity</p>
-                                <input type="number" name="number" min="1" max={data.amount} {...register('number', { required: true })} />
+                                <input value="1" type="number" name="number" min="1" max={data.amount} {...register('number', { required: true })} />
                             </div>
+
                         </div>
                     </div>
                     {Object.keys(errors).length !== 0 && (
                         <ul className={style.error}>
-                            {errors.number?.type === 'required' && <li>Email's required</li>}
+                            {errors.number?.type === 'required' && <li>Quantity's required</li>}
                         </ul>
                     )}
                     <Button
@@ -53,7 +54,7 @@ function Detail({ onClick, data }) {
                         rounded
                         medium
                     >
-                        ADD
+                        Add To Cart
                     </Button>
                     
                 </form>

@@ -1,25 +1,27 @@
-import Sidebar from '~/components/sidebar/Sidebar';
-import Topbar from '~/components/topbar/Topbar';
+import Sidebar from '~/components/Layout/DefaultLayout/sidebar/Sidebar';
+// import Topbar from '~/components/Layout/topbar/Topbar';
 import './App.css';
 import Home from '~/pages/Admin/home/Home';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import UserList from './pages/userList/UserList';
-import User from './pages/user/User';
-import NewUser from './pages/newUser/NewUser';
-import ProductList from './pages/productList/ProductList';
-import Product from './pages/product/Product';
-import NewProduct from './pages/newProduct/NewProduct';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import UserList from '~/pages/Admin/userList/UserList';
+import User from '~/pages/Admin/user/User';
+import NewUser from '~/pages/Admin/newUser/NewUser';
+import ProductList from '~/pages/Admin/productList/ProductList';
+import Product from '~/pages/Admin/product/Product';
+import NewProduct from '~/pages/Admin/newProduct/NewProduct';
+import Button from '~/components/Button';
 
 function Admin() {
     return (
-        <Router>
-            <Topbar />
+        <div>
+            {/* <Topbar /> */}
             <div className="container">
                 <Sidebar />
-                <Switch>
-                    <Route exact path="/">
+
+                {/* <Routes>
+                    <Button exact path="/">
                         <Home />
-                    </Route>
+                    </Button>
                     <Route path="/users">
                         <UserList />
                     </Route>
@@ -38,10 +40,10 @@ function Admin() {
                     <Route path="/newproduct">
                         <NewProduct />
                     </Route>
-                </Switch>
+                </Routes> */}
             </div>
-        </Router>
+        </div>
     );
 }
 
-export default Admin ;
+export default Admin;
