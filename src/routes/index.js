@@ -1,4 +1,4 @@
-import { Home, Contact, AboutUs, Vegetable, Cart, Adminpage} from '~/pages';
+import { Home, Contact, AboutUs, Vegetable,Cart, Adminpage} from '~/pages';
 import HeaderOnly from '~/components/Layout/HeaderOnly';
 
 // Không cần đăng nhập mới xem đc
