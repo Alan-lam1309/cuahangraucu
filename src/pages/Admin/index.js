@@ -1,7 +1,10 @@
-function Admin() {
-    return ( 
-<div>aaaa</div>
-     );
-}
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-export default Admin;
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
