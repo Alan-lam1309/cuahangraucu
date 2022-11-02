@@ -122,7 +122,7 @@ function Header() {
                 </div>
                 {login ? (
                     <div className={style.action}>
-                        <Button text mini>
+                        <Button to={'/cart'} text mini>
                             Cart
                         </Button>
                         <Button className={style.login} text mini onClick={handleHideLogin}>

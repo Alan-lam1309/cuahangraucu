@@ -1,0 +1,99 @@
+.wrapper{
+    
+    display: flex;
+    flex-direction: column;
+    position:relative;
+    background-color: #F7EFFF;
+}
+
+.textWhatTheySay{
+    display:block;
+    width: 51%;
+    margin: 40px 20px 50px 0;
+    font-size: 40px;
+    font-weight: 600;
+    color: rgb(75,65,65);
+
+    .line{
+        width: 51%;
+        border-top: 5px solid #2B9656;
+    }
+}
+
+
+.products{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    padding: 0 -16px;
+    max-width: 1200px;
+    
+    .product{
+        display: flex;
+        flex-wrap:wrap;
+        flex-direction: column;
+        background-color: white;
+        border: 1px solid gray;
+        border-radius: 20px;
+        box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1);
+        transition:transform linear 0.1s;
+        will-change: transform;
+        text-decoration: none;
+        padding: 0 8px;
+        overflow: hidden;
+        flex:1 1 33.33333%;
+        max-width: 33.33333%;
+
+    }
+    .product:hover
+    {
+        box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.2);
+        transform:translateY(-2px);
+    }
+
+    .image{
+        // height: 200px;
+        // width: 200px;
+        background-repeat: no-repeat;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        display: block; 
+        margin-left: auto; 
+        margin-right: auto;
+    }
+
+    .name{
+        font-size: 1.8rem;
+        font-weight: 400;
+        color: #333;
+        line-height: 1.8rem;
+        margin: 10px 10px 6px;
+        /*dòng này là để set height cho cái name nếu hơn 2 dòng sẽ hiện ra ... 1 line 18px nếu 2 dòng 36px còn >36px thì sẽ hiện ... */
+        height: 3.6rem;
+        overflow: hidden; /* này sẽ dùng để ẩn đi phần dư ngoài 36px đã set ở height trên vì thuộc tính html là luôn hiện con*/
+        display: block;
+        display: -webkit-box; /* dùng chung thuộc tính dưới */
+        -webkit-box-orient: vertical; /* hướng box , chữ theo hướng nèo , dòng 1 ở trên dòng 2 ở dưới -> chiều dọc  */
+        -webkit-line-clamp: 2; /* để limit content của 1 khối lại , 2 nghĩa là 2 dòng  */
+    }
+    .price{
+        display: flex;
+        align-items: baseline; /* lấy phần chân dòng để canh cho nó đẹp */
+        flex-wrap: wrap;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #ee4b2b;
+        margin-left: 10px
+    }
+    .btnAddtoCart
+    {
+        cursor: pointer;
+        margin: 20px;
+    }
+}
+
+.footer
+{
+    width: 100%;
+    margin-top: 50px;
+}
