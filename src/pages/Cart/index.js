@@ -1,4 +1,5 @@
 import style from './Cart.module.scss'
+import {Adminpage} from '~/pages'
 
 function Cart() {
     return ( 
@@ -6,6 +7,7 @@ function Cart() {
             <div className={style.inner}>
                 <div className={style.left}>
                     Shopping Cart
+                    <Adminpage />
                 </div>
                 <div className={style.right}>
 

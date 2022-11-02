@@ -25,7 +25,7 @@ function App() {
                             />
                         );
                     })}
-                    {privateRoutes.map((route, index)=>{
+                    {/* {privateRoutes.map((route, index)=>{
                         const Layout = route.Layout || DefaultLayout;
                         const Page = route.component;
                         return (
@@ -39,7 +39,7 @@ function App() {
                                 }
                             />
                         );
-                    })}
+                    })} */}
                 </Routes>
             </div>
         </Router>
