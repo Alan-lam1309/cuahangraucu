@@ -4,18 +4,27 @@ import { memo } from 'react';
 import Button from '../Button';
 import images from '~/assets/images';
 import style from './Detail.module.scss';
+import { database } from '~/firebase';
+import { useState } from 'react';
 // import { endAt } from 'firebase/database';
 
 function Detail({ onClick, data }) {
+    const dataDetail = data
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data = '') => {
-        
-    };
+
+    const [quantity, setQuantity] = useState(1);
+
+
+    const onSubmit = (data) => {
+         dataDetail.quantity=quantity
+};
+
+
 
     return (
         <div className={style.wrapper}>
@@ -39,7 +48,8 @@ function Detail({ onClick, data }) {
                             </div>
                             <div>
                                 <p className={style.label}>Quantity</p>
-                                <input value="1" type="number" name="number" min="1" max={data.amount} {...register('number', { required: true })} />
+                                <input value={quantity} type="number" name="number" min="1" max={data.amount} {...register('number', { required: true , onChange :(e) => setQuantity(Number(e.target.value)) } ) } />
+                                
                             </div>
 
                         </div>
@@ -49,11 +59,7 @@ function Detail({ onClick, data }) {
                             {errors.number?.type === 'required' && <li>Quantity's required</li>}
                         </ul>
                     )}
-                    <Button
-                        className={style.submit}
-                        rounded
-                        medium
-                    >
+                    <Button className={style.submit} rounded medium >
                         Add To Cart
                     </Button>
                     

@@ -5,6 +5,7 @@ import images from '~/assets/images';
 import Button from '~/components/Button';
 import style from './Home.module.scss';
 import Footer from '~/components/Layout/DefaultLayout/Footer';
+
 function Home() {
 
     
