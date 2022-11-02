@@ -32,10 +32,6 @@ node_modules/.cache/default-development/index.pack
 node_modules/.cache/default-development/index.pack.old
 =======
 node_modules/.cache/default-development/5.pack
-<<<<<<< HEAD
-node_modules/.cache/default-development/6.pack
-node_modules/.cache/default-development/6.pack
-=======
 >>>>>>> b6a09c146cebf9633c64dd2f6f1d9433f04d9b74
 node_modules/.cache/.eslintcache
 node_modules/.cache/default-development/0.pack
@@ -55,4 +51,3 @@ node_modules/.cache/default-development/8.pack
 node_modules/.cache/default-development/9.pack
 node_modules/.cache/default-development/index.pack
 node_modules/.cache/default-development/index.pack.old
->>>>>>> feca35e28622b25d19a1882c4727e4f0ed313b20
