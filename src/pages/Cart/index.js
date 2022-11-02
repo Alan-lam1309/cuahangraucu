@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useEffect, useState } from 'react';
+=======
+import style from './Cart.module.scss'
+>>>>>>> 25fcd37f5cb1e4c541b59e5aa18749d8370e2e81
 
 import * as productService from '~/api-services/productService';
 import Detail from '~/components/Detail';
@@ -34,11 +38,19 @@ function Vegetable() {
     
     return (
         <div className={style.wrapper}>
+<<<<<<< HEAD
             <h3 className={style.textWhatTheySay}>
                    Shopping Cart
                     <div className={style.line}></div>
             </h3>
             {/* {detail && <Detail onClick={()=>{setDetail(false)}} data={dataDetail} />} */}
+=======
+            <div className={style.inner}>
+                <div className={style.left}>
+                    Shopping Cart
+                </div>
+                <div className={style.right}>
+>>>>>>> 25fcd37f5cb1e4c541b59e5aa18749d8370e2e81
 
             {/* <header className={style.header}>
                 {type === 'All' ? (
