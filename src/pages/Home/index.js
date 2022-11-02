@@ -6,6 +6,9 @@ import Button from '~/components/Button';
 import style from './Home.module.scss';
 import Footer from '~/components/Layout/DefaultLayout/Footer';
 function Home() {
+
+    
+
     return (
         <div className={style.wrapper}>
             <div className={style.inner}>

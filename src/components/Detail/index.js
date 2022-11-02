@@ -32,8 +32,16 @@ function Detail({ onClick, data }) {
                         <div className={style.price}>
                             {data.price}/{data.unit}
                         </div>
-                        <p className={style.label}>PASSWORD</p>
-                        <input type="number" name="number" min="1" max={data.amount} {...register('number', { required: true })} />
+                        <div className={style.action}>
+                            <div>
+                                <p className={style.label}>Remaining</p>
+                                <p>sl nè</p>
+                            </div>
+                            <div>
+                                <p className={style.label}>Quantity</p>
+                                <input type="number" name="number" min="1" max={data.amount} {...register('number', { required: true })} />
+                            </div>
+                        </div>
                     </div>
                     {Object.keys(errors).length !== 0 && (
                         <ul className={style.error}>
@@ -51,7 +59,6 @@ function Detail({ onClick, data }) {
                 </form>
             </div>
         </div>
-        // <div>aaaaaaaaaaaaaaaaaaaa</div>
     );
 }
 

@@ -7,7 +7,7 @@
 }
 
 .inner{
-    margin: 1% 37% ;
+    margin: 0 37% ;
     min-width: 400px;
     max-width: 500px;
     background-color: white;
@@ -18,7 +18,9 @@
     display: flex;
     justify-content: flex-end;
     width: 100%;
+
 }
+
 
 .closeimage
 {
@@ -57,10 +59,19 @@
         margin-top: 14px;
         color: #4F4F4F;
     }
+
+    .action{
+        display: flex;
+        justify-content: space-around;
+    }
     
     .submit{
         width: 100%;
         margin: 20px 0;
+        &:hover{
+            cursor: pointer;
+            background-color:   #006600;
+        }
     }
     .error{
         font-size: 12px;
@@ -79,6 +90,6 @@
         width: 75%;
         border-radius: 20px;
         color: #fff;
-        background-color: red;
+        background-color: #ee4b2b;
     }
 }
