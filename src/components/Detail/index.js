@@ -13,7 +13,7 @@ function Detail({ onClick, data }) {
     const dataDetail = data
     const {
         register,
-        handleSubmit,
+        handleSubmit, 
         formState: { errors },
     } = useForm();
 
