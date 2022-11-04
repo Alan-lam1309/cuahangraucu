@@ -1,30 +1,63 @@
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { publicRoutes } from '~/routes';
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, redirect } from 'react-router-dom';
+import { privateRoutes, publicRoutes } from '~/routes';
 
 import DefaultLayout from './components/Layout/DefaultLayout';
-
+import { Admin } from './pages';
 
 function App() {
+    const [login, setLogin] = useState(false);
+
     return (
         <Router>
             <div>
                 <Routes>
-                    {publicRoutes.map((route, index) => {
-                        const Layout = route.Layout || DefaultLayout;
-                        const Page = route.component;
-                        return (
+                    {!login &&
+                        publicRoutes.map((route, index) => {
+                            const Layout = route.Layout || DefaultLayout;
+                            const Page = route.component;
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    }
+                                />
+                            );
+                        })}
+                    {!login && 
                             <Route
-                                key={index}
-                                path={route.path}
+                                path="/admin"
                                 element={
-                                    <Layout>
-                                        <Page />
-                                    </Layout>
+                                    <Admin
+                                        logined={() => {
+                                            setLogin(true);
+                                        }}
+                                    />
                                 }
                             />
-                        );
-                    })}
+                    }
+                    
+                    {login &&
+                        privateRoutes.map((route, index) => {
+                            const Layout = route.Layout || DefaultLayout;
+                            const Page = route.component;
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    }
+                                />
+                            );
+                        })}
                 </Routes>
             </div>
         </Router>

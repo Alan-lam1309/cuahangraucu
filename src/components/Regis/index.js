@@ -24,10 +24,11 @@ function Regis({ onClick, toLogin }) {
             const result = await createUserWithEmailAndPassword(auth, data.email, data.password);
             await updateProfile(auth.currentUser, { displayName: data.name });
             //
-            await userService.update(0, { ...data, id: result.user.uid, available: true });
+            await userService.update(0, { ...data, id: result.user.uid, status: 'active'});
             alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
         } else {
             const resultAPI = Object.values(getAPI);
+            const keyAPI = Object.keys(getAPI);
             resultAPI.forEach((result) => {
                 if (result.email === data.email) {
                     alert('Email đã tồn tại');
@@ -39,7 +40,7 @@ function Regis({ onClick, toLogin }) {
                 const result = await createUserWithEmailAndPassword(auth, data.email, data.password);
                 await updateProfile(auth.currentUser, { displayName: data.name });
                 //
-                await userService.update(resultAPI.length, { ...data, id: result.user.uid, available: true });
+                await userService.update(parseInt(keyAPI[keyAPI.length-1])+1, { ...data, id: result.user.uid, status: 'active'});
                 alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
             }
         }
@@ -92,12 +93,12 @@ function Regis({ onClick, toLogin }) {
                         <p className={style.label}>PASSWORD</p>
                         <input className={style.input} name="password" type="password" {...register('password', { required: true, minLength: 6 })} />
                     </div>
-                    <div className={style.action}>
+                    {/* <div className={style.action}>
                         <div className={style.checkRemember}>
                             <input type="checkbox" />
                             <div>Remember me</div>
                         </div>
-                    </div>
+                    </div> */}
                     {Object.keys(errors).length !== 0 && (
                         <ul className={style.error}>
                             {errors.name?.type === 'required' && <li>Name's required</li>}
