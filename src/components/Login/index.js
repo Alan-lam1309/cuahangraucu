@@ -3,7 +3,6 @@ import { auth, provider } from '~/firebase';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { memo } from 'react';
 
-
 import Button from '../Button';
 import images from '~/assets/images';
 import * as userService from '~/api-services/userService';
@@ -52,7 +51,6 @@ function Login({ onClick, toRegis, success }) {
         } else {
             setIncorrect(true);
         }
-
         // Realtime
         // const getAPI = await userService.get();
         // if(!getAPI){

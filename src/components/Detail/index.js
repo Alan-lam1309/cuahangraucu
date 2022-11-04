@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { memo } from 'react';
-
+import * as cartService from '~/api-services/cartService';
+import * as userService from '~/api-services/userService';
 import Button from '../Button';
 import images from '~/assets/images';
 import style from './Detail.module.scss';
@@ -18,10 +19,19 @@ function Detail({ onClick, data }) {
 
 
     const [quantity, setQuantity] = useState(1);
+    const [account, setAccount] = useState({});
 
 
-    const onSubmit = (data) => {
-         dataDetail.quantity=quantity
+    const fetchAPI = async (data, dataquantity ) => {
+        
+        await cartService.update(0, { ...data, ...dataquantity });
+        const getAPI = await userService.get(); // cai nay no lay het User ra luon 
+        console.log(data, dataquantity , getAPI);
+    }
+
+    const onSubmit = (dataquantity) => {
+        //  dataDetail.quantity=quantity;
+        fetchAPI(data, dataquantity);
 };
 
 
@@ -48,7 +58,7 @@ function Detail({ onClick, data }) {
                             </div>
                             <div>
                                 <p className={style.label}>Quantity</p>
-                                <input value={quantity} type="number" name="number" min="1" max={data.amount} {...register('number', { required: true , onChange :(e) => setQuantity(Number(e.target.value)) } ) } />
+                                    <input value={quantity} type="number" name="number" min="1" max={data.amount} {...register('number', { required: true , onChange :(e) => setQuantity(Number(e.target.value)) } ) } />
                                 
                             </div>
 

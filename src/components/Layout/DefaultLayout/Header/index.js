@@ -120,6 +120,7 @@ function Header() {
                         </Button>
                     )}
                 </div>
+
                 {login ? (
                     <div className={style.action}>
                         <Button to={'/cart'} text mini>
@@ -142,6 +143,8 @@ function Header() {
                         </Button>
                     </div>
                 )}
+
+                
             </div>
         </header>
     );
