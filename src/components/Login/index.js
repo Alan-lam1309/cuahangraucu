@@ -25,9 +25,10 @@ function Login({ onClick, toRegis, success }) {
         const resultGG = await signInWithPopup(auth, provider);
         const getAPI = await userService.get();
         if (!getAPI) {
-            await userService.update(0, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, available: true });
+            await userService.update(0, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, status: 'active'});
         } else {
             const resultAPI = Object.values(getAPI);
+            const keyAPI = Object.keys(getAPI);
             var same = 0;
             resultAPI.forEach((result) => {
                 if (result.email === resultGG.user.email) {
@@ -35,7 +36,7 @@ function Login({ onClick, toRegis, success }) {
                 }
             });
             if (same === 0) {
-                await userService.update(resultAPI.length, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, available: true });
+                await userService.update(parseInt(keyAPI[keyAPI.length-1])+1, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, status: 'active'});
                 alert(`Bạn đã đăng kí thành công với Email:${resultGG.user.email}`);
             } else {
                 alert(`Bạn đã đăng nhập thành công với Email:${resultGG.user.email}`);
@@ -115,12 +116,12 @@ function Login({ onClick, toRegis, success }) {
                         <p className={style.label}>PASSWORD</p>
                         <input className={style.input} name="password" type="password" {...(!byGG && register('password', { required: true, minLength: 6 }))} />
                     </div>
-                    <div className={style.action}>
+                    {/* <div className={style.action}>
                         <div className={style.checkRemember}>
                             <input type="checkbox" />
                             <div>Remember me</div>
                         </div>
-                    </div>
+                    </div> */}
                     {Object.keys(errors).length !== 0 && (
                         <ul className={style.error}>
                             {errors.email?.type === 'required' && <li>Email's required</li>}
