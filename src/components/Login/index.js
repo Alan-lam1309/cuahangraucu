@@ -2,7 +2,8 @@ import { useForm } from 'react-hook-form';
 import { auth, provider } from '~/firebase';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { memo } from 'react';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { getdatauser } from '~/components/actions/login';
 import Button from '../Button';
 import images from '~/assets/images';
 import * as userService from '~/api-services/userService';
@@ -17,6 +18,9 @@ function Login({ onClick, toRegis, success }) {
         formState: { errors },
     } = useForm();
 
+    const login = useSelector((state) => state.login);
+    const dispatch = useDispatch();
+
     const [incorrect, setIncorrect] = useState(false);
     const [byGG, setbyGG] = useState(false);
 
@@ -24,7 +28,7 @@ function Login({ onClick, toRegis, success }) {
         const resultGG = await signInWithPopup(auth, provider);
         const getAPI = await userService.get();
         if (!getAPI) {
-            await userService.update(0, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, status: 'active'});
+            await userService.update(0, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, status: 'active' });
         } else {
             const resultAPI = Object.values(getAPI);
             const keyAPI = Object.keys(getAPI);
@@ -35,13 +39,20 @@ function Login({ onClick, toRegis, success }) {
                 }
             });
             if (same === 0) {
-                await userService.update(parseInt(keyAPI[keyAPI.length-1])+1, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, status: 'active'});
+                await userService.update(parseInt(keyAPI[keyAPI.length - 1]) + 1, {
+                    email: resultGG.user.email,
+                    name: resultGG.user.displayName,
+                    id: resultGG.user.uid,
+                    status: 'active',
+                });
                 alert(`Bạn đã đăng kí thành công với Email:${resultGG.user.email}`);
             } else {
                 alert(`Bạn đã đăng nhập thành công với Email:${resultGG.user.email}`);
             }
         }
         success(resultGG);
+
+        console.log(JSON.stringify(dispatch(getdatauser(resultGG.user.displayName, resultGG.user.uid))));
     };
     const fetchAPI = async (data) => {
         // Authentication
@@ -49,6 +60,9 @@ function Login({ onClick, toRegis, success }) {
         if (result) {
             alert(`Bạn đã đăng nhập thành công với Email: ${data.email}`);
             success(result);
+            var uiduser = Object.keys(auth).map((key) => [auth[key]]);
+            // console.log(txt[17]);
+            console.log(JSON.stringify(dispatch(getdatauser(data.email, uiduser[17]))));
         } else {
             setIncorrect(true);
         }

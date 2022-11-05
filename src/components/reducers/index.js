@@ -1,7 +1,13 @@
 import { combineReducers } from 'redux';
-import { Product } from './product';
+
+import product from './product';
+import login from './login';
+
 
 const allReducers = combineReducers({
-    _todoProduct: Product,
+    login,
+    product,
+    // add more reducers here
 });
+
 export default allReducers;
