@@ -22,9 +22,17 @@ function Login({ onClick, toRegis, success }) {
 
     const handleGoogle = async () => {
         const resultGG = await signInWithPopup(auth, provider);
+        console.log(resultGG);
         const getAPI = await userService.get();
         if (!getAPI) {
-            await userService.update(0, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, status: 'active'});
+            await userService.update(resultGG.user.uid, {
+                email: resultGG.user.email,
+                name: resultGG.user.displayName,
+                id: resultGG.user.uid,
+                status: 'active',
+                phone: resultGG.user.phoneNumber,
+                address: '',
+            });
         } else {
             const resultAPI = Object.values(getAPI);
             const keyAPI = Object.keys(getAPI);
@@ -35,7 +43,14 @@ function Login({ onClick, toRegis, success }) {
                 }
             });
             if (same === 0) {
-                await userService.update(parseInt(keyAPI[keyAPI.length-1])+1, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, status: 'active'});
+                await userService.update(resultGG.user.uid, {
+                    email: resultGG.user.email,
+                    name: resultGG.user.displayName,
+                    id: resultGG.user.uid,
+                    status: 'active',
+                    phone: resultGG.user.phoneNumber,
+                    address: '',
+                });
                 alert(`Bạn đã đăng kí thành công với Email:${resultGG.user.email}`);
             } else {
                 alert(`Bạn đã đăng nhập thành công với Email:${resultGG.user.email}`);

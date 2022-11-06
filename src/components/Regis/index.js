@@ -24,7 +24,7 @@ function Regis({ onClick, toLogin }) {
             const result = await createUserWithEmailAndPassword(auth, data.email, data.password);
             await updateProfile(auth.currentUser, { displayName: data.name });
             //
-            await userService.update(0, { ...data, id: result.user.uid, status: 'active'});
+            await userService.update(result.user.uid, { ...data, id: result.user.uid, status: 'active'});
             alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
         } else {
             const resultAPI = Object.values(getAPI);
@@ -40,7 +40,7 @@ function Regis({ onClick, toLogin }) {
                 const result = await createUserWithEmailAndPassword(auth, data.email, data.password);
                 await updateProfile(auth.currentUser, { displayName: data.name });
                 //
-                await userService.update(parseInt(keyAPI[keyAPI.length-1])+1, { ...data, id: result.user.uid, status: 'active'});
+                await userService.update(result.user.uid, { ...data, id: result.user.uid, status: 'active'});
                 alert(`Chúc mừng bạn đăng ký thành công với Email:${data.email}`);
             }
         }
@@ -80,6 +80,16 @@ function Regis({ onClick, toLogin }) {
                                 required: true,
                             })}
                         />
+                        <p className={style.label}>PHONE</p>
+                        <input
+                            className={style.input}
+                            name="phone"
+                            type="number"
+                            {...register('phone', {
+                                required: true,
+                                minLength: 10
+                            })}
+                        />
                         <p className={style.label}>EMAIL</p>
                         <input
                             className={style.input}
@@ -88,6 +98,15 @@ function Regis({ onClick, toLogin }) {
                             {...register('email', {
                                 required: true,
                                 pattern: /^[a-z][a-z0-9_.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/i,
+                            })}
+                        />
+                        <p className={style.label}>ADDRESS</p>
+                        <input
+                            className={style.input}
+                            name="address"
+                            type="text"
+                            {...register('address', {
+                                required: true,
                             })}
                         />
                         <p className={style.label}>PASSWORD</p>
@@ -102,10 +121,13 @@ function Regis({ onClick, toLogin }) {
                     {Object.keys(errors).length !== 0 && (
                         <ul className={style.error}>
                             {errors.name?.type === 'required' && <li>Name's required</li>}
+                            {errors.phone?.type === 'required' && <li>Phone's required</li>}
+                            {errors.phone?.type === 'minLength' && <li>Phone's invalid</li>}
                             {errors.email?.type === 'required' && <li>Email's required</li>}
                             {errors.email?.type === 'pattern' && <li>Email's invalid</li>}
                             {errors.password?.type === 'required' && <li>Password's required</li>}
                             {errors.password?.type === 'minLength' && <li>Password's too short</li>}
+                            {errors.address?.type === 'required' && <li>Address's required</li>}
                         </ul>
                     )}
                     <Button type="submit" className={style.submit} rounded medium>

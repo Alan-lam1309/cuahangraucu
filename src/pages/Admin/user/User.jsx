@@ -1,125 +1,153 @@
 import {
-  // CalendarToday,
-  LocationSearching,
-  MailOutline,
-  PermIdentity,
-  PhoneAndroid,
-  Publish,
-  Cached
-} from "@mui/icons-material";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import "./user.css";
+    // CalendarToday,
+    LocationSearching,
+    MailOutline,
+    PermIdentity,
+    PhoneAndroid,
+    Cached,
+} from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+
+import './user.css';
+import * as userService from '~/api-services/userService';
+import Button from '~/components/Button';
+import * as action from '~/components/actions/userAdmin';
 
 export default function User() {
+    
+    const userAdmin = useSelector((state) => {
+        if(state){ 
+            return state.UserAdmin;
+        }
+    });
+    const dispatch = useDispatch();
+    const user = userAdmin.user;
+    const {
+        register,
+        handleSubmit, 
+        formState: { errors },
+    } = useForm();
 
-  return (
-    <div className="user">
-      <div className="userTitleContainer">
-        <h1 className="userTitle">Edit User</h1>
-        <Link to="/newUser">
-          <button className="userAddButton">Create</button>
-        </Link>
-      </div>
-      <div className="userContainer">
-        <div className="userShow">
-          {/* <div className="userShowTop">
-            <img
-              src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="userShowImg"
-            />
-            <div className="userShowTopTitle">
-              <span className="userShowUsername">{data.name}</span>
+    const onSubmit = async (data) => {
+        data.id = user.id;
+        if (data.name === '') {
+            data.name = user.name;
+        }
+        if (data.email === '') {
+            data.email = user.email;
+        }
+        if (data.phone === '') {
+            data.phone = user.phone;
+        }
+        if (data.address === '') {
+            data.address = user.address;
+        }
+        dispatch(action.setStateUser(data));
+        await userService.update(user.id,{...data,})
+    };
+
+    return (
+        <div className="user">
+            <div className="userTitleContainer">
+                <h1 className="userTitle">Edit User</h1>
+                <Link to="/newUsers">
+                    <button className="userAddButton">Create</button>
+                </Link>
             </div>
-          </div> */}
-          <div className="userShowBottom">
-            <span className="userShowTitle">Account Details</span>
-            <div className="userShowInfo">
-              <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">name</span>
+            <div className="userContainer">
+                <div className="userShow">
+                    <div className="userShowBottom">
+                        <span className="userShowTitle">Account Details</span>
+                        <div className="userShowInfo">
+                            <PermIdentity className="userShowIcon" />
+                            <span className="userShowInfoTitle">{user.id}</span>
+                        </div>
+                        <div className="userShowInfo">
+                            <PermIdentity className="userShowIcon" />
+                            <span className="userShowInfoTitle">{user.name}</span>
+                        </div>
+                        <div className="userShowInfo">
+                            <MailOutline className="userShowIcon" />
+                            <span className="userShowInfoTitle">{user.email}</span>
+                        </div>
+                        <div className="userShowInfo">
+                            <Cached className="userShowIcon" />
+                            <span className="userShowInfoTitle">{user.status}</span>
+                        </div>
+                        <span className="userShowTitle">Contact Details</span>
+                        <div className="userShowInfo">
+                            <PhoneAndroid className="userShowIcon" />
+                            <span className="userShowInfoTitle">{user.phone}</span>
+                        </div>
+                        <div className="userShowInfo">
+                            <LocationSearching className="userShowIcon" />
+                            <span className="userShowInfoTitle">{user.address}</span>
+                        </div>
+                    </div>
+                </div>
+                <div className="userUpdate">
+                    <span className="userUpdateTitle">Edit</span>
+                    <form onSubmit={handleSubmit(onSubmit)} className="userUpdateForm">
+                        <div className="userUpdateLeft">
+                            <div className="userUpdateItem">
+                                <label>Full Name</label>
+                                <input type="text" placeholder={user.name} className="userUpdateInput" {...register('name')} />
+                            </div>
+                            <div className="userUpdateItem">
+                                <label>Email</label>
+                                <input
+                                    type="text"
+                                    placeholder={user.email}
+                                    className="userUpdateInput"
+                                    {...register('email', {
+                                        pattern: /^[a-z][a-z0-9_/.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/i,
+                                    })}
+                                />
+                            </div>
+                            <div className="userUpdateItem">
+                                <label>Static</label>
+                                {user.status === 'active' ? (
+                                    <select name="active" id="active" {...register('status')}>
+                                        <option value={user.status}>{user.status}</option>
+                                        <option value="disable">disable</option>
+                                    </select>
+                                ) : (
+                                    <select name="active" id="active">
+                                        <option value={user.status}>{user.status}</option>
+                                        <option value="active">active</option>
+                                    </select>
+                                )}
+                            </div>
+                            <div className="userUpdateItem">
+                                <label>Phone</label>
+                                <input
+                                    type="number"
+                                    placeholder={user.phone}
+                                    className="userUpdateInput"
+                                    {...register('phone', {
+                                        minLength: 10,
+                                    })}
+                                />
+                            </div>
+                            <div className="userUpdateItem">
+                                <label>Address</label>
+                                <input type="text" placeholder={user.address} className="userUpdateInput" {...register('address')} />
+                            </div>
+                        </div>
+                        {Object.keys(errors).length !== 0 && (
+                            <ul className="error">
+                                {errors.email?.type === 'pattern' && <li>Email's invalid</li>}
+                                {errors.phone?.type === 'minLength' && <li>Phone's invalid</li>}
+                            </ul>
+                        )}
+                        <div className="userUpdateRight">
+                            <Button className="userUpdateButton">Update</Button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div className="userShowInfo">
-              <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">email</span>
-            </div>
-            <div className="userShowInfo">
-              <Cached className="userShowIcon" />
-              <span className="userShowInfoTitle">status</span>
-            </div>
-            {/* <span className="userShowTitle">Contact Details</span> */}
-            <div className="userShowInfo">
-              <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">+1 123 456 67</span>
-            </div>
-            <div className="userShowInfo">
-              <LocationSearching className="userShowIcon" />
-              <span className="userShowInfoTitle">New York | USA</span>
-            </div>
-          </div>
         </div>
-        <div className="userUpdate">
-          <span className="userUpdateTitle">Edit</span>
-          <form className="userUpdateForm">
-            <div className="userUpdateLeft">
-              {/* <div className="userUpdateItem">
-                <label>Username</label>
-                <input
-                  type="text"
-                  placeholder="annabeck99"
-                  className="userUpdateInput"
-                />
-              </div> */}
-              <div className="userUpdateItem">
-                <label>Full Name</label>
-                <input
-                  type="text"
-                  placeholder="Anna Becker"
-                  className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Email</label>
-                <input
-                  type="text"
-                  placeholder="annabeck99@gmail.com"
-                  className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Static</label>
-                <input
-                  type="text"
-                  placeholder="+1 123 456 67"
-                  className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Address</label>
-                <input
-                  type="text"
-                  placeholder="New York | USA"
-                  className="userUpdateInput"
-                />
-              </div>
-            </div>
-            <div className="userUpdateRight">
-              <div className="userUpdateUpload">
-                {/* <img
-                  className="userUpdateImg"
-                  src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                  alt=""
-                /> */}
-                <label htmlFor="file">
-                  <Publish className="userUpdateIcon" />
-                </label>
-                <input type="file" id="file" style={{ display: "none" }} />
-              </div>
-              <button className="userUpdateButton">Update</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }

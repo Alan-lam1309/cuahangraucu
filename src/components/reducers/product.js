@@ -19,7 +19,7 @@ const Product = (state = initProduct, action) => {
                 ...state,
             };
         case ADD_CART:
-            if (state.numberCart == 0) {
+            if (state.numberCart === 0) {
                 let cart = {
                     id: action.payload.id,
                     quantity: 1,
@@ -31,7 +31,7 @@ const Product = (state = initProduct, action) => {
             } else {
                 let check = false;
                 state.Carts.map((item, key) => {
-                    if (item.id == action.payload.id) {
+                    if (item.id === action.payload.id) {
                         state.Carts[key].quantity++;
                         check = true;
                     }
@@ -74,7 +74,7 @@ const Product = (state = initProduct, action) => {
                 ...state,
                 numberCart: state.numberCart - quantity_,
                 Carts: state.Carts.filter((item) => {
-                    return item.id != state.Carts[action.payload].id;
+                    return item.id !== state.Carts[action.payload].id;
                 }),
             };
         default:

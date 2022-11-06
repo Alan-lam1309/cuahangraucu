@@ -152,3 +152,8 @@
     color: white;
     font-weight: 600;
 }
+.error{
+  font-size: 12px;
+  list-style:square;
+  color: crimson;
+}

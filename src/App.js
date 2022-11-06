@@ -42,7 +42,7 @@ function App() {
                             />
                     }
                     
-                    {login &&
+                    {!login &&
                         privateRoutes.map((route, index) => {
                             const Layout = route.Layout || DefaultLayout;
                             const Page = route.component;
