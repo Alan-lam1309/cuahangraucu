@@ -52,7 +52,7 @@ function Login({ onClick, toRegis, success }) {
         }
         success(resultGG);
 
-        console.log(JSON.stringify(dispatch(getdatauser(resultGG.user.displayName, resultGG.user.uid))));
+        console.log(JSON.stringify(dispatch(getdatauser(resultGG.user.uid))));
     };
     const fetchAPI = async (data) => {
         // Authentication
@@ -62,7 +62,7 @@ function Login({ onClick, toRegis, success }) {
             success(result);
             var uiduser = Object.keys(auth).map((key) => [auth[key]]);
             // console.log(txt[17]);
-            console.log(JSON.stringify(dispatch(getdatauser(data.email, uiduser[17]))));
+            console.log(JSON.stringify(dispatch(getdatauser(uiduser[17]))));
         } else {
             setIncorrect(true);
         }

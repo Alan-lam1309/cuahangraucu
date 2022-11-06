@@ -11,7 +11,6 @@ function GetData(state = initUser, action) {
             return {
                 ...state,
                 _user: action.payload,
-                _user : action.payload,
             };
         default:
             return state;
