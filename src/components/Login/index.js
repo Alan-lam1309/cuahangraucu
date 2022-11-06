@@ -2,8 +2,7 @@ import { useForm } from 'react-hook-form';
 import { auth, provider } from '~/firebase';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { memo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getdatauser } from '~/components/actions/login';
+
 import Button from '../Button';
 import images from '~/assets/images';
 import * as userService from '~/api-services/userService';
@@ -18,17 +17,22 @@ function Login({ onClick, toRegis, success }) {
         formState: { errors },
     } = useForm();
 
-    const login = useSelector((state) => state.login);
-    const dispatch = useDispatch();
-
     const [incorrect, setIncorrect] = useState(false);
     const [byGG, setbyGG] = useState(false);
 
     const handleGoogle = async () => {
         const resultGG = await signInWithPopup(auth, provider);
+        console.log(resultGG);
         const getAPI = await userService.get();
         if (!getAPI) {
-            await userService.update(0, { email: resultGG.user.email, name: resultGG.user.displayName, id: resultGG.user.uid, status: 'active' });
+            await userService.update(resultGG.user.uid, {
+                email: resultGG.user.email,
+                name: resultGG.user.displayName,
+                id: resultGG.user.uid,
+                status: 'active',
+                phone: resultGG.user.phoneNumber,
+                address: '',
+            });
         } else {
             const resultAPI = Object.values(getAPI);
             const keyAPI = Object.keys(getAPI);
@@ -39,11 +43,13 @@ function Login({ onClick, toRegis, success }) {
                 }
             });
             if (same === 0) {
-                await userService.update(parseInt(keyAPI[keyAPI.length - 1]) + 1, {
+                await userService.update(resultGG.user.uid, {
                     email: resultGG.user.email,
                     name: resultGG.user.displayName,
                     id: resultGG.user.uid,
                     status: 'active',
+                    phone: resultGG.user.phoneNumber,
+                    address: '',
                 });
                 alert(`Bạn đã đăng kí thành công với Email:${resultGG.user.email}`);
             } else {
@@ -51,8 +57,11 @@ function Login({ onClick, toRegis, success }) {
             }
         }
         success(resultGG);
+<<<<<<< HEAD
 
         console.log(JSON.stringify(dispatch(getdatauser(resultGG.user.uid))));
+=======
+>>>>>>> 230b2cffcc80a94c486d2b464be8b852e1b03ffc
     };
     const fetchAPI = async (data) => {
         // Authentication
@@ -60,9 +69,12 @@ function Login({ onClick, toRegis, success }) {
         if (result) {
             alert(`Bạn đã đăng nhập thành công với Email: ${data.email}`);
             success(result);
+<<<<<<< HEAD
             var uiduser = Object.keys(auth).map((key) => [auth[key]]);
             // console.log(txt[17]);
             console.log(JSON.stringify(dispatch(getdatauser(uiduser[17]))));
+=======
+>>>>>>> 230b2cffcc80a94c486d2b464be8b852e1b03ffc
         } else {
             setIncorrect(true);
         }

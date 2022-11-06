@@ -1,3 +1,5 @@
+// import  from '~/api-services/productService';
+import * as request from '~/utils/request'
 export const INCREASE_QUANTITY = 'INCREASE_QUANTITY';
 export const DECREASE_QUANTITY = 'DECREASE_QUANTITY';
 export const GET_ALL_PRODUCT = 'GET_ALL_PRODUCT';
@@ -6,6 +8,13 @@ export const ADD_CART = 'ADD_CART';
 export const UPDATE_CART = 'UPDATE_CART';
 export const DELETE_CART = 'DELETE_CART';
 
+export const actFetchProductsRequest = () => {
+    return (dispatch) => {
+        return request.getApi('products/').then((res) => {
+            dispatch(GetAllProduct(res.data));
+        });
+    };
+};
 
 /*GET_ALL_PRODUCT*/
 export function GetAllProduct(payload) {

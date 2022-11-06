@@ -40,7 +40,7 @@ function Admin({logined}) {
         const result = await signInWithEmailAndPassword(auth, data.email, data.password);
         if (result && checkAdmin(result.user.uid, getAPI)) {
             alert(`Bạn đã đăng nhập thành công với Email: ${data.email}`);
-            redirect("/adminhome")
+            // redirect("/adminhome")
             logined()
         } else {
             setIncorrect(true);

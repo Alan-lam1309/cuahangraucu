@@ -1,14 +1,16 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import * as userService from '~/api-services/userService';
-import User from '../user/User';
+import * as action from '~/components/actions/userAdmin';
 import Button from '~/components/Button';
 import './userList.css';
 
 export default function UserList() {
     const [data, setData] = useState([]);
+    const dispatch = useDispatch();
 
     const fetchAPI = async () => {
         // Realtime
@@ -19,7 +21,17 @@ export default function UserList() {
 
     useEffect(() => {
         fetchAPI();
-    });
+    }, []);
+
+    const handleGetUser = async (dataUser) => {
+        const getAPI = await userService.get();
+        const results = Object.values(getAPI);
+        results.forEach((result) => {
+            if (result.id === dataUser.id) {
+                dispatch(action.setStateUser(result));
+            } 
+        });
+    };
 
     const handleDelete = (id) => {
         setData(data.filter((item) => item.id !== id));
@@ -34,14 +46,14 @@ export default function UserList() {
         },
         { field: 'email', headerName: 'Email', width: 300 },
         {
-            field: 'status',
-            headerName: 'Status',
-            width: 120,
+            field: 'phone',
+            headerName: 'Phone',
+            width: 160,
         },
         {
-            field: 'transaction',
-            headerName: 'Transaction Volume',
-            width: 160,
+            field: 'status',
+            headerName: 'Status',
+            width: 100,
         },
         {
             field: 'action',
@@ -53,7 +65,7 @@ export default function UserList() {
                         <Button
                             className="userListEdit"
                             onClick={() => {
-                                <User data={params.row} />;
+                                handleGetUser(params.row);
                             }}
                         >
                             <Button to="/users">Edit</Button>

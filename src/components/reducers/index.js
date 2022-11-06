@@ -1,13 +1,9 @@
 import { combineReducers } from 'redux';
-
-import product from './product';
-import login from './login';
-
+import Product from './product';
+import UserAdmin from './userAdmin';
 
 const allReducers = combineReducers({
-    login,
-    product,
-    // add more reducers here
+    _todoProduct: Product,
+    UserAdmin,
 });
-
 export default allReducers;
