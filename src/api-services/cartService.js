@@ -6,10 +6,10 @@ export const get = async (id='') => {
     return userApi;
 };
 
-// export const set = async (option, content) => {
-//     const path = `users/${option}`;
-//     request.setApi(path, content);
-// };
+export const set = async (option, content) => {
+    const path = `cart/${option}`;
+    request.setApi(path, content);
+};
 
 export const update = async (id='', content) => {
     const path = 'cart/'+id;

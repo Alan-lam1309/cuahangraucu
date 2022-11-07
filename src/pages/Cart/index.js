@@ -20,8 +20,8 @@ function Cart() {
         setlaykq(laykq);
     };
 
-    const loginuid = useSelector((state) => state.login);
-    var uiduser = Object.keys(loginuid).map((key) => [loginuid[key]]);
+    // const loginuid = useSelector((state) => state.login);
+    // var uiduser = Object.keys(loginuid).map((key) => [loginuid[key]]);
 
     // const handleID = async () => {
     //     var same = 0;
@@ -47,18 +47,34 @@ function Cart() {
 
     return (
         <div className={style.products}>
+            <div className={style.homepage}>
+                <h3 className={style.textWhatTheySay}>
+                          Shopping Cart
+                        <div className={style.line}></div>
+                </h3>
+            </div>
+
+            
             {laykq.map((rs) => (
                 <div key={rs.id} className={style.product}>
                     <img src={rs.image} alt="imaaage" className={style.image}></img>
-                    <div className={style.name}>{rs.name}</div>
-                    <div className={style.name}>{rs.price}</div>
-                    <div className={style.name}>{rs.unit}</div>
-                    <div className={style.name}>{rs.quantity}</div>
+                    <div className={style.text_cart_product_1}>
+                        <div className={style.text_cart_product_text1}>{rs.name}</div>
+                        <div className={style.text_cart_product_text2}>
+                            Quantity : {rs.quantity} {rs.unit}
+                        </div>
+                    </div>
+                    <div className={style.text_cart_product_2}>
+                        <div>{rs.price} Đ</div>
+                    </div>
+                    <div>
+                        
+                    </div>
                 </div>
             ))}
-            <Button text  className={style.close}>
+            {/* <Button text  className={style.close}>
                CHECK OUT
-            </Button>
+            </Button> */}
         </div>
     )
 };

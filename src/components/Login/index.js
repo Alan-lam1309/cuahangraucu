@@ -8,9 +8,12 @@ import images from '~/assets/images';
 import * as userService from '~/api-services/userService';
 import style from './Login.module.scss';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getdatauser } from '~/components/actions/login';
 // import { endAt } from 'firebase/database';
 
 function Login({ onClick, toRegis, success }) {
+    const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
@@ -57,11 +60,8 @@ function Login({ onClick, toRegis, success }) {
             }
         }
         success(resultGG);
-<<<<<<< HEAD
 
         console.log(JSON.stringify(dispatch(getdatauser(resultGG.user.uid))));
-=======
->>>>>>> 230b2cffcc80a94c486d2b464be8b852e1b03ffc
     };
     const fetchAPI = async (data) => {
         // Authentication
@@ -69,12 +69,9 @@ function Login({ onClick, toRegis, success }) {
         if (result) {
             alert(`Bạn đã đăng nhập thành công với Email: ${data.email}`);
             success(result);
-<<<<<<< HEAD
             var uiduser = Object.keys(auth).map((key) => [auth[key]]);
             // console.log(txt[17]);
             console.log(JSON.stringify(dispatch(getdatauser(uiduser[17]))));
-=======
->>>>>>> 230b2cffcc80a94c486d2b464be8b852e1b03ffc
         } else {
             setIncorrect(true);
         }

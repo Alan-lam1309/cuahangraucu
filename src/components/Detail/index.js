@@ -29,6 +29,18 @@ function Detail({ onClick, data }) {
     const fetchAPI = async () => {
         await cartService.update(uiduser, dataDetail);
     };
+    const handleManyProducts = async () => {
+        
+        if(dataDetail.userid === id._user && dataDetail.id === data.id)
+        {
+            var newquantity = dataDetail.quantity + 1;
+            await cartService.set(dataDetail.quantity ,  dataDetail.quantity = newquantity);
+        }
+        // else
+        // {
+        //     await cartService.update(uiduser, dataDetail );
+        // }
+    }
 
     const [id] = useState(loginuid);
 
@@ -36,8 +48,7 @@ function Detail({ onClick, data }) {
         dataDetail.quantity = quantity;
         dataDetail.userid = id._user;
         fetchAPI();
-
-        if (dataDetail.id === )
+        handleManyProducts();
     };
 
     return (
