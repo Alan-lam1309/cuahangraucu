@@ -13,9 +13,9 @@ export default function NewUser() {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data) => { 
         const result = await createUserWithEmailAndPassword(auth, data.email, data.password);
-        await userService.update(result.user.uid,data);
+        await userService.update(result.user.uid,{...data, id: result.user.uid});
         alert("Đã thêm user có email: "+data.email);
     };
 

@@ -8,3 +8,10 @@ export function setStateUser(payload) {
         payload,
     };
 }
+
+export function setStateProduct(payload) {
+    return {
+        type: 'SET_STATE_PRODUCT',
+        payload,
+    };
+}

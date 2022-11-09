@@ -1,13 +1,16 @@
 import './productList.css';
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline } from '@mui/icons-material';
-import {productRows} from "~/pages/Admin/dummyData"
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as productService from '~/api-services/productService';
+import Button from '~/components/Button';
+import { useDispatch } from 'react-redux';
+import { setProduct } from '~/components/reducers/admin';
 
 export default function ProductList() {
     const [data, setData] = useState([]);
+
+    const dispatch = useDispatch();
 
     const fetchAPI = async () => {
         // Realtime
@@ -18,7 +21,7 @@ export default function ProductList() {
 
     useEffect(() => {
         fetchAPI();
-    });
+    },[]);
 
     const handleDelete = (id) => {
         setData(data.filter((item) => item.id !== id));
@@ -43,12 +46,17 @@ export default function ProductList() {
         {
             field: 'amount',
             headerName: 'Amount',
-            width: 120,
+            width: 100,
+        },
+        {
+            field: 'unit',
+            headerName: 'Unit',
+            width: 100,
         },
         {
             field: 'price',
             headerName: 'Price',
-            width: 160,
+            width: 100,
         },
         {
             field: 'action',
@@ -57,9 +65,14 @@ export default function ProductList() {
             renderCell: (params) => {
                 return (
                     <>
-                        <Link to={'/products'}>
-                            <button className="productListEdit">Edit</button>
-                        </Link>
+                        <Button
+                            className="productListEdit"
+                            onClick={() => {
+                                dispatch(setProduct(params.row));
+                            }}
+                        >
+                            <Button to='/products'>Edit</Button>
+                        </Button>
                         <DeleteOutline className="productListDelete" onClick={() => handleDelete(params.row.id)} />
                     </>
                 );
