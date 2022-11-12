@@ -106,7 +106,7 @@ function Detail({ onClick, data }) {
                                 Add To Cart1
                             </Button>) 
                         : (
-                            <Button onClick={toLogin} className={style.submit} rounded medium >
+                            <Button className={style.submit} rounded medium >
                                 Add To Cart
                             </Button>)
                         } 
