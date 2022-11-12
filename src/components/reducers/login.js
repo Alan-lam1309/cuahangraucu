@@ -1,4 +1,4 @@
-import { GET_ALLDATA_USER} from '../actions/login';
+import { GET_ALLDATA_USER , LOG_OUT} from '../actions/login';
 
 
 const initUser = {
@@ -17,4 +17,17 @@ function GetData(state = initUser, action) {
     }
 }
 
+function LogOut (state = initUser , action)
+{
+    switch (action.type)
+    {
+        case LOG_OUT:
+            return {
+                ...state,
+                _user : action.payload.remove(),
+            }
+    }
+}
+
 export default GetData;
+
