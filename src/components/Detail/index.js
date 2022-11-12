@@ -14,6 +14,10 @@ import { getdatauser } from '~/components/actions/login';
 function Detail({ onClick, data }) {
     const dataDetail = data;
 
+
+    const [checklogin, setcheckLogin] = useState(false);
+
+
     const {
         register,
         handleSubmit,
@@ -29,31 +33,42 @@ function Detail({ onClick, data }) {
     const fetchAPI = async () => {
         await cartService.update(uiduser, dataDetail);
     };
+
+
     const handleManyProducts = async () => {
         
         if(dataDetail.userid === id._user && dataDetail.id === data.id)
         {
             var newquantity = dataDetail.quantity + 1;
-            await cartService.set(dataDetail.quantity ,  dataDetail.quantity = newquantity);
+            var newprice  = dataDetail.price + data.price;
+            await cartService.set(uiduser , dataDetail ,  dataDetail.quantity = newquantity , dataDetail.price = newprice); 
         }
-        // else
-        // {
-        //     await cartService.update(uiduser, dataDetail );
-        // }
+        else
+        {
+            await cartService.update(uiduser, dataDetail );
+        }
     }
 
+    const handleLogin = () => {
+        if(id._user)
+        {
+            setcheckLogin(true);
+        }
+        
+    };
     const [id] = useState(loginuid);
 
     const onSubmit = () => {
         dataDetail.quantity = quantity;
         dataDetail.userid = id._user;
         fetchAPI();
+        handleLogin();
         handleManyProducts();
     };
 
     return (
         <div className={style.wrapper}>
-            <div className={style.inner}>
+            <div className={style.inner}> 
                 <Button text onClick={onClick} className={style.close}>
                     <img src={images.close} alt="close" className={style.closeimage} />
                 </Button>
@@ -85,9 +100,17 @@ function Detail({ onClick, data }) {
                         </div>
                     </div>
                     {Object.keys(errors).length !== 0 && <ul className={style.error}>{errors.number?.type === 'required' && <li>Quantity's required</li>}</ul>}
-                    <Button to="/cart" className={style.submit} rounded medium onClick={() => {onSubmit(data)}}>
-                        Add To Cart
-                    </Button>
+                   {checklogin 
+                        ? (
+                            <Button to="/cart" className={style.submit} rounded medium onClick={() => {onSubmit(data)}}>
+                                Add To Cart1
+                            </Button>) 
+                        : (
+                            <Button onClick={toLogin} className={style.submit} rounded medium >
+                                Add To Cart
+                            </Button>)
+                        } 
+                    
                 </form>
             </div>
         </div>
