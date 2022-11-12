@@ -1,6 +1,4 @@
-// import { IconDeli,IconFire,IconLike } from '~/assets/icons/Home';
-// import { memo } from 'react';
-import { useState } from 'react';
+
 import Button from '~/components/Button';
 import images from '~/assets/images';
 import Footer from '~/components/Layout/DefaultLayout/Footer';

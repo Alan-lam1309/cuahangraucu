@@ -29,19 +29,19 @@ function App() {
                                 />
                             );
                         })}
-                    {!login && 
-                            <Route
-                                path="/admin"
-                                element={
-                                    <Admin
-                                        logined={() => {
-                                            setLogin(true);
-                                        }}
-                                    />
-                                }
-                            />
-                    }
-                    
+                    {!login && (
+                        <Route
+                            path="/admin"
+                            element={
+                                <Admin
+                                    logined={() => {
+                                        setLogin(true);
+                                    }}
+                                />
+                            }
+                        />
+                    )}
+
                     {!login &&
                         privateRoutes.map((route, index) => {
                             const Layout = route.Layout || DefaultLayout;

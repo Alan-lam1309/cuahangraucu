@@ -13,20 +13,16 @@ import { useForm } from 'react-hook-form';
 import './user.css';
 import * as userService from '~/api-services/userService';
 import Button from '~/components/Button';
-import * as action from '~/components/actions/userAdmin';
+import { setUser } from '~/components/reducers/admin';
 
 export default function User() {
-    
-    const userAdmin = useSelector((state) => {
-        if(state){ 
-            return state.UserAdmin;
-        }
+    const user = useSelector((state) => {
+        return state.admin.user;
     });
     const dispatch = useDispatch();
-    const user = userAdmin.user;
     const {
         register,
-        handleSubmit, 
+        handleSubmit,
         formState: { errors },
     } = useForm();
 
@@ -44,8 +40,8 @@ export default function User() {
         if (data.address === '') {
             data.address = user.address;
         }
-        dispatch(action.setStateUser(data));
-        await userService.update(user.id,{...data,})
+        dispatch(setUser(data));
+        await userService.update(user.id, { ...data });
     };
 
     return (

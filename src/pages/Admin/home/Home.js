@@ -12,7 +12,7 @@ export default function AdminHome() {
 
     return (
         <div className="home">
-            {logined ? (
+            {!logined ? (
                 <Admin
                     logined={() => {
                         setLogined(true);

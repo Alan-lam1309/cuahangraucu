@@ -31,13 +31,15 @@ function Admin({logined}) {
     const fetchAPI = async (data) => {
         // Realtime
         const getAPI = await adminService.get();
+        console.log(getAPI);
         if (!getAPI) {
             alert('Chưa có tài khoản nào!!!!');
             return;
         } 
-
+        console.log(data);
         // Authentication
         const result = await signInWithEmailAndPassword(auth, data.email, data.password);
+        console.log(result);
         if (result && checkAdmin(result.user.uid, getAPI)) {
             alert(`Bạn đã đăng nhập thành công với Email: ${data.email}`);
             // redirect("/adminhome")

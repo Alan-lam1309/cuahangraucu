@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import * as userService from '~/api-services/userService';
-import * as action from '~/components/actions/userAdmin';
 import Button from '~/components/Button';
 import './userList.css';
+import { setUser } from '~/components/reducers/admin';
 
 export default function UserList() {
     const [data, setData] = useState([]);
@@ -28,8 +28,8 @@ export default function UserList() {
         const results = Object.values(getAPI);
         results.forEach((result) => {
             if (result.id === dataUser.id) {
-                dispatch(action.setStateUser(result));
-            } 
+                dispatch(setUser(result));
+            }
         });
     };
 
