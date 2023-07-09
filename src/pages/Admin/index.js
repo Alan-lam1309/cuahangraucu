@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { auth } from '~/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { redirect} from 'react-router-dom';
+// import { redirect} from 'react-router-dom';
 
 import Button from '~/components/Button';
 import images from '~/assets/images';
@@ -41,8 +41,8 @@ function Admin({logined}) {
         const result = await signInWithEmailAndPassword(auth, data.email, data.password);
         console.log(result);
         if (result && checkAdmin(result.user.uid, getAPI)) {
+            alert('aaaaaaa')
             alert(`Bạn đã đăng nhập thành công với Email: ${data.email}`);
-            // redirect("/adminhome")
             logined()
         } else {
             setIncorrect(true);

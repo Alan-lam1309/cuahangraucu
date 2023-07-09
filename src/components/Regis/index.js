@@ -84,7 +84,8 @@ function Regis({ onClick, toLogin }) {
                         <input
                             className={style.input}
                             name="phone"
-                            type="number"
+                            type="tel"
+                            // pattern="[0-9]"
                             {...register('phone', {
                                 required: true,
                                 minLength: 10

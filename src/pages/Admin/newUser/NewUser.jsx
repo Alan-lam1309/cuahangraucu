@@ -5,19 +5,33 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import './newUser.css';
 import { auth } from '~/firebase';
+import { useEffect } from 'react';
 
 export default function NewUser() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        reset,
+        formState: { errors ,isSubmitSuccessful},
     } = useForm();
 
     const onSubmit = async (data) => { 
         const result = await createUserWithEmailAndPassword(auth, data.email, data.password);
-        await userService.update(result.user.uid,{...data, id: result.user.uid});
+        await userService.update(result.user.uid, {...data, id: result.user.uid})
         alert("Đã thêm user có email: "+data.email);
     };
+
+    useEffect(() => {
+        reset({
+            name: '',
+            email: '',
+            password: '',
+            status: '',
+            phone: '',
+            address: '',
+        });
+        // eslint-disable-next-line
+    }, [isSubmitSuccessful]);
 
     return (
         <div className="newUser">
@@ -45,8 +59,9 @@ export default function NewUser() {
                 <div className="newUserItem">
                     <label>Phone</label>
                     <input
-                        type="text"
-                        placeholder="+1 123 456 78"
+                        type="tel"
+                        placeholder="012.345.6789"
+                        pattern= "0[0-9\s.-]{9,13}"
                         {...register('phone', {
                             minLength: 10,
                             required: true,
@@ -60,8 +75,8 @@ export default function NewUser() {
                 <div className="newUserItem">
                     <label>Active</label>
                     <select className="newUserSelect" name="active" id="active" {...register('status')}>
-                        <option value="active">active</option>
-                        <option value="disable">disable</option>
+                        <option value="active">Active</option>
+                        <option value="disable">Disable</option>
                     </select>
                 </div>
                 <div>

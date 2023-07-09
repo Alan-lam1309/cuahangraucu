@@ -8,11 +8,11 @@ import images from '~/assets/images';
 import * as userService from '~/api-services/userService';
 import style from './Login.module.scss';
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getdatauser } from '~/components/actions/login';
 // import { endAt } from 'firebase/database';
 
-function Login({ onClick, toRegis, success }) {
+function Login({ close, toRegis }) {
     const dispatch = useDispatch();
     const {
         register,
@@ -25,8 +25,7 @@ function Login({ onClick, toRegis, success }) {
 
     const handleGoogle = async () => {
         const resultGG = await signInWithPopup(auth, provider);
-        console.log(resultGG);
-        const getAPI = await userService.get();
+        const getAPI = await userService.get(resultGG.user.uid);
         if (!getAPI) {
             await userService.update(resultGG.user.uid, {
                 email: resultGG.user.email,
@@ -36,63 +35,41 @@ function Login({ onClick, toRegis, success }) {
                 phone: resultGG.user.phoneNumber,
                 address: '',
             });
+            alert(`Bạn đã đăng kí thành công với Email:${resultGG.user.email}`);
+            const getNewAPI = await userService.get(resultGG.user.uid);
+            dispatch(getdatauser(getNewAPI));
+            close();
         } else {
-            const resultAPI = Object.values(getAPI);
-            const keyAPI = Object.keys(getAPI);
-            var same = 0;
-            resultAPI.forEach((result) => {
-                if (result.email === resultGG.user.email) {
-                    same++;
+            if (getAPI.email === resultGG.user.email) {
+                if (getAPI.status === 'disable') {
+                    alert('Tài khoản của bạn đã bị khóa!!!');
+                } else {
+                    dispatch(getdatauser(getAPI));
+                    alert(`Bạn đã đăng nhập thành công với Email:${resultGG.user.email}`);
+                    close();
                 }
-            });
-            if (same === 0) {
-                await userService.update(resultGG.user.uid, {
-                    email: resultGG.user.email,
-                    name: resultGG.user.displayName,
-                    id: resultGG.user.uid,
-                    status: 'active',
-                    phone: resultGG.user.phoneNumber,
-                    address: '',
-                });
-                alert(`Bạn đã đăng kí thành công với Email:${resultGG.user.email}`);
-            } else {
-                alert(`Bạn đã đăng nhập thành công với Email:${resultGG.user.email}`);
             }
         }
-        success(resultGG);
-
-        console.log(JSON.stringify(dispatch(getdatauser(resultGG.user.uid))));
     };
     const fetchAPI = async (data) => {
         // Authentication
-        const result = await signInWithEmailAndPassword(auth, data.email, data.password);
-        if (result) {
-            alert(`Bạn đã đăng nhập thành công với Email: ${data.email}`);
-            success(result);
-            var uiduser = Object.keys(auth).map((key) => [auth[key]]);
-            // console.log(txt[17]);
-            console.log(JSON.stringify(dispatch(getdatauser(uiduser[17]))));
-        } else {
+        try {
+            const result = await signInWithEmailAndPassword(auth, data.email, data.password);
+            const getAPI = await userService.get(result.user.uid);
+            console.log(getAPI);
+            if (getAPI.id === result.user.uid) {
+                if (getAPI.status !== 'disable') {
+                    alert(`Bạn đã đăng nhập thành công với Email: ${data.email}`);
+                    dispatch(getdatauser(getAPI));
+                    close();
+                } else {
+                    alert('Tài khoản của bạn đã bị khóa !!!');
+                }
+            }
+        } catch (error) {
+            alert(error);
             setIncorrect(true);
         }
-        // Realtime
-        // const getAPI = await userService.get();
-        // if(!getAPI){
-        //     alert('Chưa có tài khoản nào!!!!')
-        // }else{
-        //     const resultsAPI = Object.values(getAPI)
-        //     for(var i=0; i<resultsAPI.length; i++){
-        //         if(resultsAPI[i].email === data.email && resultsAPI[i].password === data.password){
-        //             success(resultsAPI[i])
-        //             break
-        //         }else if(i == resultsAPI.length - 1){
-        //             setIncorrect(true)
-        //         }
-        //     }
-        //     resultsAPI.map((result)=>{
-
-        //     })
-        // }
     };
     const onSubmit = (data = '') => {
         if (byGG) {
@@ -105,7 +82,7 @@ function Login({ onClick, toRegis, success }) {
     return (
         <div className={style.wrapper}>
             <div className={style.inner}>
-                <Button text onClick={onClick} className={style.close}>
+                <Button text onClick={close} className={style.close}>
                     <img src={images.close} alt="close" className={style.closeimage} />
                 </Button>
                 <div className={style.header}>

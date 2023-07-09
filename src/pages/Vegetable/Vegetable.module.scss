@@ -1,10 +1,9 @@
 .wrapper{
-    
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position:relative;
     background-color: #F7EFFF;
 }
 .header{
@@ -12,6 +11,7 @@
     display: flex;
     padding: 16px;
     margin : 40px 0;
+    margin-top: 110px;
     justify-content:space-around;
     align-items: center;
     width: 60%;
@@ -58,12 +58,9 @@
     }
 
     .image{
-        // height: 200px;
-        // width: 200px;
-        background-repeat: no-repeat;
-        border-top-left-radius: 4px;
-        border-top-right-radius: 4px;
-        display: block; 
+        height: 200px;
+        width: 200px;
+        margin: 10px 0;
         margin-left: auto; 
         margin-right: auto;
     }
@@ -73,9 +70,9 @@
         font-weight: 400;
         color: #333;
         line-height: 1.8rem;
-        margin: 10px 10px 6px;
+        margin-left: 30px;
         /*dòng này là để set height cho cái name nếu hơn 2 dòng sẽ hiện ra ... 1 line 18px nếu 2 dòng 36px còn >36px thì sẽ hiện ... */
-        height: 3.6rem;
+        height: 2.4rem;
         overflow: hidden; /* này sẽ dùng để ẩn đi phần dư ngoài 36px đã set ở height trên vì thuộc tính html là luôn hiện con*/
         display: block;
         display: -webkit-box; /* dùng chung thuộc tính dưới */
@@ -87,14 +84,14 @@
         align-items: baseline; /* lấy phần chân dòng để canh cho nó đẹp */
         flex-wrap: wrap;
         font-size: 1.5rem;
-        margin-bottom: 20px;
+        margin-bottom: 5px;
         color: #ee4b2b;
-        margin-left: 10px
+        margin-left: 30px
     }
     .btnAddtoCart
     {
         cursor: pointer;
-        margin: 20px;
+        margin: 10px;
     }
 }
 

@@ -10,8 +10,7 @@ function Vegetable() {
     const [type, setType] = useState('All');
     const [results, setResult] = useState([]);
     const [detail, setDetail] = useState(false);
-    const [dataDetail, setDataDetail] = useState();
-    
+    const [dataDetail, setDataDetail] = useState({});
     const fetchAPI = async () => {
         const getAPI = await productService.get();
         const result = Object.values(getAPI);
@@ -22,26 +21,44 @@ function Vegetable() {
             setResult(result);
         }
     };
+    const VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
 
     useEffect(() => {
         fetchAPI();
+        // eslint-disable-next-line
     }, [type]);
 
-    const handleDetail = (data) =>{
+    const handleDetail = (data) => {
         setDetail(true);
         setDataDetail(data);
-    }
-    
+    };
+
     return (
         <div className={style.wrapper}>
-            {detail && <Detail onClick={()=>{setDetail(false)}} data={dataDetail} />}
+            {detail && (
+                <Detail
+                    onClick={() => {
+                        console.log('close detail');
+                        setDetail(false);
+                    }}
+                    data={dataDetail}
+                />
+            )}
             <header className={style.header}>
                 {type === 'All' ? (
                     <Button text className={style.selected}>
                         All type
                     </Button>
                 ) : (
-                    <Button text onClick={()=>{setType('All');}}>
+                    <Button
+                        text
+                        onClick={() => {
+                            setType('All');
+                        }}
+                    >
                         All style
                     </Button>
                 )}
@@ -50,7 +67,12 @@ function Vegetable() {
                         Vegetables
                     </Button>
                 ) : (
-                    <Button text onClick={()=>{setType('Vegetable');}}>
+                    <Button
+                        text
+                        onClick={() => {
+                            setType('Vegetable');
+                        }}
+                    >
                         Vegetables
                     </Button>
                 )}
@@ -59,7 +81,12 @@ function Vegetable() {
                         Fruits
                     </Button>
                 ) : (
-                    <Button text onClick={()=>{setType('Fruit');}}>
+                    <Button
+                        text
+                        onClick={() => {
+                            setType('Fruit');
+                        }}
+                    >
                         Fruits
                     </Button>
                 )}
@@ -68,21 +95,33 @@ function Vegetable() {
                         Spices
                     </Button>
                 ) : (
-                    <Button text onClick={()=>{setType('Spice');}}>
+                    <Button
+                        text
+                        onClick={() => {
+                            setType('Spice');
+                        }}
+                    >
                         Spices
-                    </Button>
+                    </Button>   
                 )}
             </header>
-            
-            <div className={style.products }>
+
+            <div className={style.products}>
                 {results.map((result) => (
                     <div key={result.id} className={style.product}>
                         <img src={result.image} alt="imaaage" className={style.image}></img>
-                        <div className={style.name} >{result.name}</div>
+                        <div className={style.name}>{result.name}</div>
                         <div className={style.price}>
-                            {result.price}/{result.unit}
+                        {VND.format(result.price)}/{result.unit}
                         </div>
-                        <Button className={style.btnAddtoCart} medium rounded onClick={() => {handleDetail(result)}} >
+                        <Button
+                            className={style.btnAddtoCart}
+                            medium
+                            rounded
+                            onClick={() => {
+                                handleDetail(result);
+                            }}
+                        >
                             Add To Cart
                         </Button>
                     </div>
@@ -90,9 +129,8 @@ function Vegetable() {
             </div>
 
             <div className={style.footer}>
-            <Footer />
+                <Footer />
             </div>
-            
         </div>
     );
 }

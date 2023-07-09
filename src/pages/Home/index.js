@@ -8,8 +8,6 @@ import Footer from '~/components/Layout/DefaultLayout/Footer';
 
 function Home() {
 
-    
-
     return (
         <div className={style.wrapper}>
             <div className={style.inner}>
@@ -32,17 +30,6 @@ function Home() {
                     <img src={images.hinh3} className={style.hinh3} alt="hinh3" />
                 </div>
             </div>
-            <div className={style.threeCriteria}>
-                <Button to="/" square large lefticon={<IconDeli />}>
-                    Free delivery
-                </Button>
-                <Button to="/" square large lefticon={<IconFire />}>
-                    Local products
-                </Button>
-                <Button to="/" square large lefticon={<IconLike />}>
-                    Always fresh healthy
-                </Button>
-            </div>
 
             <div className={style.bodyhome}>
                 <h3 className={style.textWhatTheySay}>
@@ -62,7 +49,7 @@ function Home() {
                                 </p>
                                 <img src={images.hinh1} className={style.whattheysayimage} alt="hinh1" />
                                 <p className={style.whattheysaycustomer}>
-                                    Tyler Alcacea <div className={style.whattheysaycustomer_opacity}>Toronto CA</div>
+                                    Tyler Alcacea <span className={style.whattheysaycustomer_opacity}>Toronto CA</span>
                                 </p>
                             </div>
                         </div>
@@ -75,7 +62,7 @@ function Home() {
                                 </p>
                                 <img src={images.hinh1} className={style.whattheysayimage} alt="hinh1" />
                                 <p className={style.whattheysaycustomer}>
-                                    Tyler Alcacea <div className={style.whattheysaycustomer_opacity}>Toronto CA</div>
+                                    Tyler Alcacea <span className={style.whattheysaycustomer_opacity}>Toronto CA</span>
                                 </p>
                             </div>
                         </div>
@@ -88,7 +75,7 @@ function Home() {
                                 </p>
                                 <img src={images.hinh1} className={style.whattheysayimage} alt="hinh1" />
                                 <p className={style.whattheysaycustomer}>
-                                    Tyler Alcacea <div className={style.whattheysaycustomer_opacity}>Toronto CA</div>
+                                    Tyler Alcacea <span className={style.whattheysaycustomer_opacity}>Toronto CA</span>
                                 </p>
                             </div>
                         </div>

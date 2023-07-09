@@ -2,7 +2,7 @@ import { GET_ALLDATA_USER , LOG_OUT} from '../actions/login';
 
 
 const initUser = {
-    _user: [],
+    _user: {},
 };
 
 function GetData(state = initUser, action) {

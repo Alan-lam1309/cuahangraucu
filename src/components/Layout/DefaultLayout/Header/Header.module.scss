@@ -1,38 +1,39 @@
 .wrapper {
-    background-color:#FFEDCC;
+    background-color: #FFE9A0;
     width: 100%;
-    height: 132px;
+    position: fixed;
+    z-index: 1;
 }
 
-.inner{
+.inner {
     display: flex;
     height: 100%;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
     font-size: 20px;
-    z-index: 5; 
 }
 
 .logo {
     display: flex;
     align-items: center;
+    margin: 5px 0;
     margin-left: 40px;
 }
 
 // pages css
-.curPage{
+.curPage {
     font-weight: 600;
 }
 
 // action css
-.action{
+.action {
     margin-right: 40px;
 }
 
-.login{
+.login {
     position: relative;
-    
-    &::after{
+
+    &::after {
         content: ' ';
         margin-left: 20px;
         background-color: #000;
@@ -40,4 +41,3 @@
         height: 25px;
     }
 }
-

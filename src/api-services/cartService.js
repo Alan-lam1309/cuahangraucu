@@ -1,7 +1,7 @@
 import * as request from '~/utils/request'
 
 export const get = async (id='') => {
-    const path =  'cart/' + id;
+    const path =  'cart/'+id;
     const userApi = await request.getApi(path);
     return userApi;
 };

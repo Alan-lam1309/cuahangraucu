@@ -8,17 +8,17 @@ const images = {
     google: require('~/assets/images/imgHome/google.png'),
     close: require('~/assets/images/imgHome/close.png'),
     paypal: require('~/assets/images/imgHome/paypal.svg').default,
-    googleplay : require('~/assets/images/imgHome/googleplaydown.svg').default,
-    appstore : require('~/assets/images/imgHome/appstoredown.svg').default,
-    aboutus : require('~/assets/images/imgHome/aboutus.svg').default,
-    test : require('~/assets/images/imgHome/test.svg').default,
-    hinh1: require('~/assets/images/imgHome/hinh1.png'),
-    hinh2: require('~/assets/images/imgHome/hinh2.png'),
-    hinh3: require('~/assets/images/imgHome/hinh3.png'),
+    googleplay: require('~/assets/images/imgHome/googleplaydown.svg').default,
+    appstore: require('~/assets/images/imgHome/appstoredown.svg').default,
+    aboutus: require('~/assets/images/imgHome/aboutus.svg').default,
+    test: require('~/assets/images/imgHome/test.svg').default,
+    hinh1: require('~/assets/images/imgHome/hinh1.jpg'),
+    hinh2: require('~/assets/images/imgHome/hinh2.jpg'),
+    hinh3: require('~/assets/images/imgHome/hinh3.jpg'),
     hinh4: require('~/assets/images/imgHome/hinh4.jpg'),
     facebook: require('~/assets/images/imgHome/facebook.png'),
     instagram: require('~/assets/images/imgHome/instagram.png'),
     twitter: require('~/assets/images/imgHome/twitter.png'),
 };
 
-export default images 
+export default images;

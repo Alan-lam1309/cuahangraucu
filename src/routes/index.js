@@ -9,14 +9,12 @@ export const publicRoutes = [
     { path: '/aboutUs', component: AboutUs, Layout: HeaderOnly },
     { path: '/contact', component: Contact, Layout: HeaderOnly },
     { path: '/vegetable', component: Vegetable, Layout: HeaderOnly },
-    { path: '/cart', component: Cart, Layout: HeaderOnly },  
-    // {path: '/admin',component: Admin},
-
-
 ];
-// Cần đăng nhập mới xem đc
 export const privateRoutes = [
-    // { path: '/cart', component: Cart, Layout: HeaderOnly },
+    { path: '/cart', component: Cart, Layout: HeaderOnly },  
+]
+// Cần đăng nhập mới xem đc
+export const adminRoutes = [
     {path: '/admin', component: AdminHome , Layout: LayoutAdmin},
     {path: '/users', component: User , Layout: LayoutAdmin},
     {path: '/userslist', component: UserList , Layout: LayoutAdmin},
