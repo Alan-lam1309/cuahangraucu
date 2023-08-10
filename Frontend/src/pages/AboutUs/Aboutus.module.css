@@ -1,0 +1,32 @@
+.wrapper {
+  flex-direction: column;
+  padding-top: 90px;
+  background-color: #FFEDCC;
+}
+
+.bodyhome {
+  background-color: rgb(247, 239, 255);
+  padding: 100px 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.aboutus_image {
+  padding-right: 50px;
+}
+
+.aboutus_text {
+  text-align: center;
+  padding: 0 150px;
+}
+
+.aboutus_text_1 {
+  font-size: 50px;
+  color: #2B9656;
+  font-weight: 300;
+  margin-bottom: 50px;
+}
+
+.aboutus_text_2 {
+  font-size: 22px;
+}/*# sourceMappingURL=Aboutus.module.css.map */

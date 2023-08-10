@@ -1,0 +1,87 @@
+.wrapper {
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+}
+
+.inner {
+  margin: 8% 37%;
+  min-width: 400px;
+  max-width: 500px;
+  background-color: white;
+  box-shadow: 0px 0px 15px 15px #999999;
+  position: fixed;
+}
+
+.close {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.closeimage {
+  max-width: 20px;
+  margin: 5px;
+}
+
+.buy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.buy .welcomeveggo {
+  font-size: 16px;
+  font-style: italic;
+}
+.buy .image {
+  height: 100%;
+  width: 100%;
+}
+.buy .title {
+  font-size: 50px;
+  font-weight: 300;
+}
+.buy .label {
+  font-size: 13px;
+  margin-bottom: -8px;
+  margin-top: 14px;
+  color: #4F4F4F;
+}
+.buy .action {
+  display: flex;
+  justify-content: space-around;
+}
+.buy .submit {
+  justify-content: center;
+  margin: 20px;
+}
+.buy .submit:hover {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  background-color: #006600;
+}
+.buy .error {
+  font-size: 12px;
+  list-style: square;
+  color: crimson;
+}
+.buy .name {
+  font-size: 38px;
+  font-weight: 500;
+}
+.buy .price {
+  font-size: 16px;
+  width: 75%;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  background-color: #ee4b2b;
+}/*# sourceMappingURL=Detail.module.css.map */

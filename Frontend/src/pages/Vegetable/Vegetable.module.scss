@@ -1,0 +1,100 @@
+.wrapper {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7efff;
+}
+.header {
+    background-color: white;
+    display: flex;
+    padding: 16px;
+    margin: 40px 0;
+    margin-top: 110px;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    border-radius: 20px;
+    font-size: 18px;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    
+}
+.selected {
+    cursor: pointer;
+    font-size: 21px;
+    font-weight: 700;
+    text-align: center;
+    overflow: hidden;
+}
+
+.products {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 -16px;
+    max-width: 1200px;
+    margin-bottom: 50px;
+
+    .product {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        background-color: white;
+        border: 1px solid gray;
+        border-radius: 20px;
+        box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1);
+        transition: transform linear 0.1s;
+        will-change: transform;
+        text-decoration: none;
+        padding: 0 8px;
+        overflow: hidden;
+        flex: 1 1 33.33333%;
+        max-width: 33.33333%;
+    }
+    .product:hover {
+        box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .image {
+        height: 200px;
+        width: 200px;
+        margin: 10px 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .name {
+        font-size: 1.8rem;
+        font-weight: 400;
+        color: #333;
+        line-height: 1.8rem;
+        margin-left: 30px;
+        /*dòng này là để set height cho cái name nếu hơn 2 dòng sẽ hiện ra ... 1 line 18px nếu 2 dòng 36px còn >36px thì sẽ hiện ... */
+        height: 2.4rem;
+        overflow: hidden; /* này sẽ dùng để ẩn đi phần dư ngoài 36px đã set ở height trên vì thuộc tính html là luôn hiện con*/
+        display: block;
+        display: -webkit-box; /* dùng chung thuộc tính dưới */
+        -webkit-box-orient: vertical; /* hướng box , chữ theo hướng nèo , dòng 1 ở trên dòng 2 ở dưới -> chiều dọc  */
+        -webkit-line-clamp: 2; /* để limit content của 1 khối lại , 2 nghĩa là 2 dòng  */
+    }
+    .price {
+        display: flex;
+        align-items: baseline; /* lấy phần chân dòng để canh cho nó đẹp */
+        flex-wrap: wrap;
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+        color: #ee4b2b;
+        margin-left: 30px;
+    }
+    .btnAddtoCart {
+        cursor: pointer;
+        margin: 10px;
+    }
+}
+
+.footer {
+    width: 100%;
+    margin-top: 50px;
+}
