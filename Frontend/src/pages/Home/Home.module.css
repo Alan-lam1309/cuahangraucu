@@ -1,0 +1,226 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-top: 90px;
+}
+
+.clear {
+  clear: both;
+}
+
+.inner {
+  display: flex;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+}
+
+.textWelcome {
+  margin-left: 50px;
+  margin-top: 100px;
+  font-size: 64px;
+  font-weight: 700;
+}
+
+.veggo {
+  margin-top: 30px;
+  margin-bottom: 80px;
+  margin-left: 125px;
+}
+.veggo .veo {
+  padding-bottom: 34px;
+}
+
+.btnShopping {
+  margin-left: 120px;
+  margin-bottom: 147px;
+  background-color: #CC3636;
+  border: 1px solid #CC3636;
+}
+
+.right {
+  display: flex;
+  margin-left: 90px;
+}
+.right img {
+  margin-right: 30px;
+}
+
+.hinh1 {
+  max-width: 250px;
+  height: 70%;
+  margin-top: 80px;
+}
+
+.hinh2 {
+  max-width: 250px;
+  height: 70%;
+  margin-top: 150px;
+}
+
+.hinh3 {
+  max-width: 250px;
+  height: 70%;
+  margin-top: 40px;
+}
+
+.threeCriteria {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 150px 0 69px;
+}
+
+.bodyhome {
+  background-color: rgb(247, 239, 255);
+  padding: 0px 40px 100px 40px;
+}
+
+.textWhatTheySay {
+  display: block;
+  width: 51%;
+  margin: 40px 0 50px;
+  font-size: 40px;
+  font-weight: 600;
+  color: rgb(75, 65, 65);
+  text-align: justify;
+}
+.textWhatTheySay .line {
+  width: inherit;
+  border-top: 5px solid #2b9656;
+}
+
+.whattheysay {
+  margin-top: 25px;
+  padding: 64px 0;
+  width: 1381;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: white;
+}
+
+.whattheysay_row {
+  margin-top: 32px;
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.whattheysay_3column {
+  float: left;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 33.3333%;
+}
+
+.whattheysayimage {
+  padding-right: 16px;
+  width: 20%;
+  float: left;
+  width: 20%;
+}
+
+.whattheysaytext {
+  font-size: 21px;
+  margin: 50px 0;
+}
+
+.whattheysayheading {
+  font-size: 36px;
+}
+
+.whattheysay_background1 {
+  background-color: #2b9656;
+  padding: 76.5px 45.86px;
+  border-radius: 20px;
+}
+
+.whattheysay_background2 {
+  background-color: #a859c3;
+  padding: 76.5px 45.86px;
+  border-radius: 20px;
+}
+
+.whattheysay_background3 {
+  background-color: #4a7ad3;
+  padding: 76.5px 45.86px;
+  border-radius: 20px;
+}
+
+.whattheysaycustomer {
+  font-size: 20px;
+  float: left;
+  font-weight: 700;
+}
+.whattheysaycustomer .whattheysaycustomer_opacity {
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+.contact {
+  margin: 100px 0;
+  width: 100%;
+}
+
+.contact_image {
+  width: 33.3333%;
+  float: left;
+  height: 494px;
+}
+
+.contact_content {
+  float: left;
+  background-color: #f8fcfa;
+  border: 1px none;
+  height: 494px;
+  width: 66.666%;
+  padding: 100px;
+}
+
+.contact_title {
+  text-align: center;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.contact_text {
+  color: #646464;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contact_input {
+  float: left;
+  width: 80%;
+  padding: 16px;
+  background-color: rgba(230, 230, 230, 0.8117647059);
+  border: none;
+  font-size: 17px;
+  outline: none;
+}
+
+.btnSubmit {
+  float: left;
+  background-color: #2b9656;
+  width: 20%;
+  justify-content: center;
+  color: white;
+}
+
+footer {
+  text-align: center;
+  background-color: #2b9656;
+  line-height: 2.6 rem;
+  padding: 50px;
+}
+
+.paypal {
+  margin-top: 40px;
+}/*# sourceMappingURL=Home.module.css.map */

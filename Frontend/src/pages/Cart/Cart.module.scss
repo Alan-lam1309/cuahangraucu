@@ -1,0 +1,102 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 90px;
+    width: 100%;
+    position: relative;
+}
+.title {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding-left: 50px;
+    font-size: 40px;
+    font-weight: 600;
+    color: rgb(75, 65, 65);
+    text-align: justify;
+    background-color: #f7efff;
+
+    .line {
+        border-top: 5px solid #2d9a59;
+        width: 500px;
+    }
+}
+.contentCart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    // background-color:#2d9a59;
+    width: 80%;
+}
+.products {
+    width: 45%;
+    margin: 30px 100px 0 0;  
+}
+.product {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(172, 182, 174);
+    .close {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        .closeImage {
+            width: 100%;
+            margin-left: 10px;
+        }
+    }
+    .imageProduct {
+        width: 15%;
+        height: 70px;
+        margin: 15px;
+    }
+    .contentProduct {
+        margin: 0 10px;
+        width: 80%;
+        .titleProduct {
+            font-size: 27px;
+            font-weight: 500;
+        }
+        .stockProduct {
+            font-size: 16px;
+        }
+        .qpProduct {
+            display: flex;
+            font-size: 16px;
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .contentProductright {
+            display: flex;
+            flex-direction: column;
+        }
+        .btn {
+            width: 20px;
+            font-size: 30px;
+        }
+        .quantityWrap {
+            height: 25px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+        .quantityProduct {
+            border: 1px solid rgb(195, 202, 196);
+            font-size: 16px;
+            padding: 2px;
+            width: 50px;
+        }
+        .priceProduct {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}
+.payment {
+    position: fixed;
+    right: 200px;
+    top: 200px;
+    border: solid 1px black;
+}

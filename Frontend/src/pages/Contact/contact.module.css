@@ -1,0 +1,21 @@
+.wrapper {
+  padding-top: 90px;
+}
+
+.contact_image {
+  padding: 40px;
+  position: relative;
+}
+
+.btnSubmit {
+  font-size: 24px;
+  color: white;
+  text-align: center;
+  background-color: #2B9656;
+  padding: 14px 68px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  position: absolute;
+  top: 730px;
+  left: 660px;
+}/*# sourceMappingURL=contact.module.css.map */

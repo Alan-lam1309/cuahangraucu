@@ -1,0 +1,37 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700&display=swap');
+
+// Set Default
+:root {
+    // đặt biến
+    --font_default: 'Montserrat', sans-serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; //thuận tiên hơn khi tính toán w, h
+}
+
+html {
+    font-size: 85%;
+    color: black;
+}
+
+body {
+    font-family: var(--font_default);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;//tối ưu tốc độ hiển thị phông một cách nhanh nhất
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+ul{
+    list-style-type: none;
+}
+
+

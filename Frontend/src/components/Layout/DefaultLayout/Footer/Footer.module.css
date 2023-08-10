@@ -1,0 +1,34 @@
+.footer {
+  background-color: #2B9656;
+}
+
+.footer_settings {
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer_settings_column1 {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.footer_heading {
+  font-weight: 700;
+  font-size: 30px;
+  text-align: center;
+  justify-content: center;
+}
+
+.hinhfooter {
+  margin: 10px;
+  max-width: 50px;
+}
+
+.hinhfooter2 {
+  display: block;
+}
+
+.footer_thanhtoan {
+  margin-top: 40px;
+}/*# sourceMappingURL=Footer.module.css.map */
